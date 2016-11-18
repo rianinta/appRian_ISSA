@@ -11,9 +11,5 @@
             "PACKAGE_NAME": "com.inta.rian.situacionagropecuariasemanal"
         }
     },
-    "dependent_plugins": {},
-    "modules": [],
-    "plugin_metadata": {
-        "cordova-plugin-whitelist": "1.3.0"
-    }
+    "dependent_plugins": {}
 }

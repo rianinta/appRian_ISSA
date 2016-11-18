@@ -1,12 +1,37 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.inta.rian.situacionagropecuariasemanal" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Situación Agropecuaria Semanal</name>
-    <description>
-        A blank PhoneGap app.
-    </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
-    </author>
-    <content src="index.html" />
-    <access origin="*" />
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.inta.rian.situacionagropecuariasemanal" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+	<name>Situación Agropecuaria Semanal</name>
+	<description>
+		Informe Semanal de Situación Agropecuaria RIAN
+	</description>
+	<author email="ramos.lucas@inta.gob.ar" href="http://rian.inta.gob.ar">
+     	RIAN Sistemas
+	</author>
+	<!-- Preferencias -->
+	<preference name="fullscreen" value="true"/>
+	<preference name="webviewbounce" value="false"/>
+	<preference name="DisallowOverscroll" value="true"/>
+	<preference name="exit-on-suspend" value="false"/>
+	<preference name="loadUrlTimeoutValue" value="700000"/>
+
+	<!-- Icono App -->
+	<icon src="icon.png"/>
+	
+	<content src="index.html"/>
+	<access origin="*" onlyInBrowser="true"/>
+	
+	<!-- Plugin Fullscreen -->
+	<plugin name="cordova-plugin-fullscreen" source="npm"/>
+	<plugin name="cordova-plugin-whitelist" version="1"/>
+	
+	<!-- Intents -->
+	<allow-intent href="http://*/*"/>
+	<allow-intent href="https://*/*"/>
+	<allow-intent href="tel:*"/>
+	<allow-intent href="sms:*"/>
+	<allow-intent href="mailto:*"/>
+	<allow-intent href="geo:*"/>
+	<platform name="android">
+		<allow-intent href="market:*"/>
+	</platform>
 </widget>
