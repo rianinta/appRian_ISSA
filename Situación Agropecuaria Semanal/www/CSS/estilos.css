@@ -1,3 +1,34 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
 body {
 	background-color: #0070B6;
+	font-family: Verdana;
+}
+
+#splashScreen{
+	height: 100vh;
+	width: 100%;
+	display:flex;
+  	align-items:center;
+  	justify-content: center;
+}
+
+#contenedorItemsSplash{
+	margin:10px;
+}
+
+#TextoSplash{
+	font-weight: bold;
+	color: white;
+	padding-left: 6px;
+}
+
+#contenedorItemsSplash img{
+	width: 100%;
+	height: auto;
+	max-width: 500px;
+	max-height: 500px;
 }
