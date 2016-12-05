@@ -4,9 +4,18 @@
 }
 
 body {
-	background-color: #0070B6;
 	font-family: Verdana;
+	font-size: 16px;
+	background-color: #ECECEC;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* SPLASH SCREEN */
 
 #splashScreen{
 	height: 100vh;
@@ -14,6 +23,7 @@ body {
 	display:flex;
   	align-items:center;
   	justify-content: center;
+  	background-color: #0070B6;
 }
 
 #contenedorItemsSplash{
@@ -32,3 +42,38 @@ body {
 	max-width: 500px;
 	max-height: 500px;
 }
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* HEADER */
+
+header{
+	background-color: #0070B6;
+	border-bottom: 4px solid #76A852;
+}
+
+#LogosINTARIAN{
+
+}
+
+#LogosINTARIAN img{
+	margin: 5px;
+	height: 50px;
+	width: 150px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* CUERPO */
+
+#TituloSistema{
+	margin:8px 0px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#cuerpo{
+	padding: 5px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* MEDIA QUERIES */
+

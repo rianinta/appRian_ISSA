@@ -12,18 +12,15 @@
 	<preference name="webviewbounce" value="false"/>
 	<preference name="DisallowOverscroll" value="true"/>
 	<preference name="exit-on-suspend" value="false"/>
+	<preference name="Orientation" value="portrait" />
 	<preference name="loadUrlTimeoutValue" value="700000"/>
-
 	<!-- Icono App -->
 	<icon src="icon.png"/>
-	
 	<content src="index.html"/>
 	<access origin="*" onlyInBrowser="true"/>
-	
 	<!-- Plugin Fullscreen -->
 	<plugin name="cordova-plugin-fullscreen" source="npm"/>
 	<plugin name="cordova-plugin-whitelist" version="1"/>
-	
 	<!-- Intents -->
 	<allow-intent href="http://*/*"/>
 	<allow-intent href="https://*/*"/>
