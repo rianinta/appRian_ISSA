@@ -1,10 +1,9 @@
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-body {
-	font-family: Verdana;
+html, body {
+    height: 100%;
+    margin: 0px;
+    min-height: 100%;
+    padding: 0px;
+    font-family: Verdana;
 	font-size: 16px;
 	background-color: #ECECEC;
 }
@@ -44,15 +43,22 @@ img {
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* HEADER */
+/* CONTENIDO APP */
 
-header{
-	background-color: #0070B6;
-	border-bottom: 4px solid #76A852;
+#contenido {
+    height: 100%;
+    width: 100%;
 }
 
-#LogosINTARIAN{
-
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* HEADER */
+        
+header{
+    float: left;
+	width: 100%;
+	background-color: #0070B6;
+	border-bottom: 4px solid #76A852;
+	height: 100px;
 }
 
 #LogosINTARIAN img{
@@ -61,19 +67,42 @@ header{
 	width: 150px;
 }
 
-/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* CUERPO */
-
 #TituloSistema{
-	margin:8px 0px;
+	padding:8px 0px;
 	text-align: center;
 	font-weight: bold;
+	background-color: #ECECEC;
+	margin: 0px;
 }
 
-#cuerpo{
-	padding: 5px;
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* MAPA */
+
+#map{
+    height: calc(100% - 104px);
+    width: 100%;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* MEDIA QUERIES */
 
+@media (max-width: 452px) {
+	header{
+		height: 122px;
+	}
+
+	#map{
+	    height: calc(100% - 126px);
+	    width: 100%;
+	}
+}
+
+@media (max-width: 350px) {
+	#TituloSistema{
+		font-size: 14px;
+	}
+
+	header{
+		height: 116px;
+	}	
+}

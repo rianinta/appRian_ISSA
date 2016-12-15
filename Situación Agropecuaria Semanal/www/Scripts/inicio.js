@@ -1,10 +1,15 @@
 var splTimerChequearConexion // Timer para comprobar la conexión a internet en el Splash Screen
 
+var myOptions;
+var map;
+var geoXml;
+
 $(function(){
 	//$("#contenido").hide()
 	//MostrarSplash()
 
 	$("#splashScreen").hide()
+	InicializarMapa()
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,4 +49,26 @@ function MostrarSplash(){
 			}
 		}
 	}
+}
+
+function InicializarMapa(){
+	myOptions = {
+        center: new google.maps.LatLng(-40, -64),
+        streetViewControl: false,
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    geoXml = new geoXML3.parser({
+        map: map,
+        singleInfoWindow: true,
+        zoom: false,
+        afterParse: useTheData
+    });
+}
+
+function useTheData(doc) {
+    console.log("Hola mapa!")
 }
