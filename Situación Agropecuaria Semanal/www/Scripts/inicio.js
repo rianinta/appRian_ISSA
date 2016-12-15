@@ -4,6 +4,8 @@ var myOptions;
 var map;
 var geoXml;
 
+var controller;
+
 $(function(){
 	//$("#contenido").hide()
 	//MostrarSplash()
@@ -75,7 +77,8 @@ function useTheData(doc) {
 }
 
 function InicializarMenu(){
-	var controller = new slidebars();
+	controller = new slidebars()
+
 	controller.init();
 
 	$('.js-toggle-right-slidebar').on('click', function(event) {
@@ -93,6 +96,10 @@ function InicializarMenu(){
 
     $('body').on('click','.js-close-any-slidebar', function (event) {
         event.stopPropagation();
+        controller.close();
+    });
+
+    $('#CerrarMenu').on('click', function (event) {
         controller.close();
     });
 }
