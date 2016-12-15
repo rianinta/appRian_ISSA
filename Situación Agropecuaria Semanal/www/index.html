@@ -9,8 +9,10 @@
         <script type='text/javascript' src='Scripts/jquery.min.js'></script>
         <script type="text/javascript" src="Scripts/gmaps/geoxmlv3.js"></script>
         <script type="text/javascript" src="Scripts/gmaps/ProjectedOverlay.js"></script>
+        <script type="text/javascript" src="Scripts/slidebars.js"></script>
         <script type="text/javascript" src="Scripts/inicio.js"></script>
 
+        <link rel="stylesheet" href="CSS/slidebars.css">
         <link rel="stylesheet" href="CSS/estilos.css">
     </head>
     <body>
@@ -26,10 +28,11 @@
 
         <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- CONTENIDO APLICACIÓN -->
-        <div id="contenido">
+        <div id="contenido" canvas="container">
             <header>
                 <div id="LogosINTARIAN">
                     <img src="Imagenes/LogoINTARIAN.svg" alt="INTARIAN">
+                    <img id="AbrirMenu" class="js-toggle-right-slidebar" src="Imagenes/iconoMenu.png" alt="INTARIAN">
                 </div>
                 <p id="TituloSistema">Seguimiento Semanal de los Sistemas Productivos</p>
             </header>
@@ -38,10 +41,21 @@
             <!-- BODY -->
 
             <div id="map">
-                hola
+                
             </div>
         </div> 
         
+        <!-- SLIDEBARS -->
+        <div off-canvas="slidebar-2 right shift" class="MenuLateral">
+            <p>Slidebar with id 'slidebar-2' on the right side and shift style.</p>
+            <ul>
+                <li>Lalala1</li>
+                <li>Lalala2</li>
+                <li>Lalala3</li>
+                <li>Lalala4</li>
+            </ul>
+        </div>
+
         <script type="text/javascript" src="cordova.js"></script>
     </body>
 </html>

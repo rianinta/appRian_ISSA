@@ -10,6 +10,7 @@ $(function(){
 
 	$("#splashScreen").hide()
 	InicializarMapa()
+	InicializarMenu()
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,4 +72,27 @@ function InicializarMapa(){
 
 function useTheData(doc) {
     console.log("Hola mapa!")
+}
+
+function InicializarMenu(){
+	var controller = new slidebars();
+	controller.init();
+
+	$('.js-toggle-right-slidebar').on('click', function(event) {
+        event.stopPropagation();
+        controller.toggle('slidebar-2');
+    });
+
+    $(controller.events).on('opened', function () {
+        $('[canvas="container"]').addClass('js-close-any-slidebar');
+    });
+
+    $(controller.events).on('closed', function () {
+        $('[canvas="container"]').removeClass('js-close-any-slidebar');
+    });
+
+    $('body').on('click','.js-close-any-slidebar', function (event) {
+        event.stopPropagation();
+        controller.close();
+    });
 }
