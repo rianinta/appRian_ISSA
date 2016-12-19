@@ -13,6 +13,21 @@ $(function(){
 	$("#splashScreen").hide()
 	InicializarMapa()
 	InicializarMenu()
+
+	$("#cmdLlamarWs").click(function(){
+		var ahora = new Date();
+    	//geoXml.parse("armarMapa.aspx?rnd=" + ahora.getTime() + "&IdRegion=99&IdPrograma=64");
+    	geoXml.parse("http://riancarga.inta.gob.ar/WsEAR/ArmarKML.aspx?rnd=" + ahora.getTime() + "&IdProvincia=22&IdCampania=6&IdCultivo=6");
+    	controller.close()
+	});
+
+	$("#agregarTexto").click(function(){
+		//$("#contenidoPortbox").text($("#contenidoPortbox").text() + "/" + "Lucas Lucas Lucas Lucas Ramos Ramos Ramos Ramos")
+		$(".close-portBox").click();
+		$("#lnkAbrirCargando").click();
+
+		$("#pbxCargando .close-portBox").hide()
+	});	
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

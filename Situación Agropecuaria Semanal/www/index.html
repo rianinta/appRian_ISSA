@@ -10,9 +10,12 @@
         <script type="text/javascript" src="Scripts/gmaps/geoxmlv3.js"></script>
         <script type="text/javascript" src="Scripts/gmaps/ProjectedOverlay.js"></script>
         <script type="text/javascript" src="Scripts/slidebars.js"></script>
+        <script type="text/javascript" src="Scripts/portBox.jquery.ui.js"></script>
+        <script type="text/javascript" src="Scripts/portBox.slimscroll.min.js"></script>
         <script type="text/javascript" src="Scripts/inicio.js"></script>
 
         <link rel="stylesheet" href="CSS/slidebars.css">
+        <link rel="stylesheet" href="CSS/portBox.css">
         <link rel="stylesheet" href="CSS/estilos.css">
     </head>
     <body>
@@ -45,10 +48,26 @@
             </div>
         </div> 
         
+        <!-- PORTBOX -->
+        <div id="mySite" class="portBox">
+            <button id="agregarTexto">Mas</button>
+            <div id="contenidoPortbox">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare nec odio facilisis ultricies. Suspendisse id odio vitae mauris cursus vestibulum. In malesuada finibus libero, quis scelerisque sem porttitor ut. Fusce elit enim, fermentum ac risus quis, consectetur lacinia ipsum. Suspendisse malesuada lacus et enim vestibulum, in aliquet nibh imperdiet. Maecenas semper lorem eu massa iaculis, et ultricies felis molestie. Curabitur vestibulum accumsan diam, quis luctus tellus finibus nec. Nulla vitae imperdiet massa. Morbi vestibulum elit erat, et fermentum lorem suscipit sit amet. In porttitor sagittis luctus. Morbi consectetur lectus turpis, nec imperdiet augue ullamcorper vitae. Phasellus vitae mollis urna. Ut quam ante, congue a lacus id, ullamcorper porttitor libero.
+            </div>
+        </div>
+        <div id="pbxCargando" class="portBox">
+            Cargando...
+        </div>
+
         <!-- SLIDEBARS -->
         <div off-canvas="slidebar-2 right shift" class="MenuLateral">
             <img id="CerrarMenu" src="Imagenes/iconoCerrarMenu.png" alt="">
             <div style="clear: both"></div>
+            <p class="TituloMenuLateral">Menú</p>
+            <button class="cmdVerde">Nueva consulta</button>
+            <button class="cmdVerde">Guardar mapa</button>
+            <button class="cmdVerde">Cargar mapa</button>
+            <button class="cmdVerde">Salir</button>
             <p>Slidebar with id 'slidebar-2' on the right side and shift style.</p>
             <ul>
                 <li>Lalala1</li>
@@ -56,6 +75,10 @@
                 <li>Lalala3</li>
                 <li>Lalala4</li>
             </ul>
+            <button id="cmdLlamarWs">Cargar mapa</button>
+            <a href="#" data-display="mySite" data-closeBGclick="true" class="button">Project display demo</a>
+            <a href="#" id="lnkAbrirCargando" data-display="pbxCargando" data-closeBGclick="true" class="button" style="display: none;">Project display demo LALALA</a>
+
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
