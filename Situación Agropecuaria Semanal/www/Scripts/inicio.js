@@ -14,6 +14,14 @@ $(function(){
 	InicializarMapa()
 	InicializarMenu()
 
+	$("#cmdNuevaConsulta").click(function(){
+		controller.close()
+		alert("Ahi voy")
+		var ahora = new Date();
+    	//geoXml.parse("armarMapa.aspx?rnd=" + ahora.getTime() + "&IdRegion=99&IdPrograma=64");
+    	geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime());
+	});
+
 	$("#cmdLlamarWs").click(function(){
 		var ahora = new Date();
     	//geoXml.parse("armarMapa.aspx?rnd=" + ahora.getTime() + "&IdRegion=99&IdPrograma=64");
@@ -86,6 +94,7 @@ function InicializarMapa(){
     geoXml = new geoXML3.parser({
         map: map,
         singleInfoWindow: true,
+        mapTypeControl: false,
         zoom: false,
         afterParse: useTheData
     });
