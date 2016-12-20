@@ -16,10 +16,10 @@ $(function(){
 
 	$("#cmdNuevaConsulta").click(function(){
 		controller.close()
-		alert("Ahi voy")
+		alert("Ahi voy - ISSA")
 		var ahora = new Date();
-    	geoXml.parse("http://riancarga.inta.gob.ar/WsEAR/ArmarKML.aspx?rnd=" + ahora.getTime() + "&IdProvincia=22&IdCampania=6&IdCultivo=6");
-    	//geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime());
+    	//geoXml.parse("http://riancarga.inta.gob.ar/WsEAR/ArmarKML.aspx?rnd=" + ahora.getTime() + "&IdProvincia=22&IdCampania=6&IdCultivo=6");
+    	geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime());
 	});
 
 	$("#cmdLlamarWs").click(function(){
