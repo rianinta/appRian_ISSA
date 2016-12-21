@@ -52,6 +52,11 @@ $(function(){
 	$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
 	    alert("Click! " + $(this).data("idvar"))
 	});
+
+	$('body').on('click', '#pbxSeleccionVariable .lnkVolverSeleccion', function() {
+	    alert("Volviendo!")
+	});
+
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

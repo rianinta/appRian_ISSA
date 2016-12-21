@@ -34,28 +34,23 @@
 	box-sizing: border-box;
 }
 
-.close-portBox{
-		font-size: 22px;
-		line-height: .5;
+.close-portBox, .lnkVolverSeleccion{
 		position: absolute;
 		top: -6px;
-		right: -7px;
-		color: #fff !important;
-		text-shadow:none;
-		/*font-family: 'Source Sans Pro', sans-serif;*/
-		font-family: Arial;
-		cursor: pointer;
-		border-radius:50%;
+		right: -3px;
 		padding:5px;
-		background-color:#085980;
 		overflow:visible;
-		/*border:2px solid #fff;*/
-		text-decoration:none;
 }
 
-.close-portBox img{
+.close-portBox img, .lnkVolverSeleccion img{
 	width: 25px;
 }
+
+.lnkVolverSeleccion{
+	right: 40px;
+	top: 3px;
+}
+
 
 /*.close-portBox:hover{
 	color: #5c5c5c !important;
