@@ -15,7 +15,7 @@ $(function(){
 	InicializarMenu()
 
 	$("#cmdNuevaConsulta").click(function(){
-		cmdNuevaConsulta_click()
+		//cmdNuevaConsulta_click()
 	});
 
 	$("#cmdLlamarWs").click(function(){
@@ -35,6 +35,22 @@ $(function(){
 
 	$("#AbrirPrimerModal").click(function(){
 		controller.close()
+	});
+
+	$("#cmdSalir").click(function(){
+		/*var unHtml = '<div id="pbxPrueba" class="portBox">Hola!</div><a href="#" id="lnkPbPrueba" data-display="pbxPrueba" data-closeBGclick="false" class="button">Abrir</a>'
+		
+		$("#PruebaScroll").html(unHtml)*/
+
+		var htmlDivPbx
+		htmlDivPbx = '<div id="pbxSeleccionVariable" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">¿Qué información desea consultar?</p><button class="cmdVerde" data-idvar="1">Trigo</button><button class="cmdVerde" data-idvar="2">Maíz</button><button class="cmdVerde" data-idvar="24">Maíz tardío</button><button class="cmdVerde" data-idvar="3">Girasol</button><button class="cmdVerde" data-idvar="4">Soja</button><button class="cmdVerde" data-idvar="23">Soja 2º</button><button class="cmdVerde" data-idvar="5">Algodón</button><button class="cmdVerde" data-idvar="11">Oferta forrajera bovinos</button><button class="cmdVerde" data-idvar="12">Estado rodeos bovinos</button><button class="cmdVerde" data-idvar="15">Oferta forrajera ovinos/caprinos</button><button class="cmdVerde" data-idvar="16">Estado rodeos ovinos/caprinos</button><button class="cmdVerde" data-idvar="13">Tabaco</button><button class="cmdVerde" data-idvar="14">Caña de azucar</button><button class="cmdVerde" data-idvar="19">Vid</button><button class="cmdVerde" data-idvar="17">Arroz</button><button class="cmdVerde" data-idvar="18">Maní</button><button class="cmdVerde" data-idvar="8">Pepita y Carozo</button><button class="cmdVerde" data-idvar="7">Cítricos</button><button class="cmdVerde" data-idvar="9">Olivos</button><button class="cmdVerde" data-idvar="6">Porotos</button><button class="cmdVerde" data-idvar="10">Forestales</button><button class="cmdVerde" data-idvar="21">Cebada</button><button class="cmdVerde" data-idvar="22">Sorgo</button></div><a href="#" id="lnkPbSeleccionVariable" data-display="pbxSeleccionVariable" data-closeBGclick="false" class="button" style="display: none;">#</a>'
+
+		$("#divPbxSeleccionVariable").html(htmlDivPbx)
+		$("#lnkPbSeleccionVariable").click()
+	})
+
+	$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
+	    alert("Click! " + $(this).data("idvar"))
 	});
 });
 
@@ -140,4 +156,7 @@ function cmdNuevaConsulta_click(){
     
     $(".close-portBox").click();
 	$("#lnkPbSeleccionVariable").click();
+	//$("#pbxSeleccionVariable").slimScroll({ scrollTo : '0px' });
+	$("#pbxSeleccionVariable").scrollTop(0);
+	
 }
