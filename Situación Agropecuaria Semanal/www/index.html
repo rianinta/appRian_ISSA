@@ -56,7 +56,7 @@
             <button class="cmdVerde" id="cmdNuevaConsulta">Nueva consulta</button>
             <button class="cmdVerde">Guardar mapa</button>
             <button class="cmdVerde">Cargar mapa</button>
-            <button class="cmdVerde" id="cmdSalir">Salir</button>
+            <button class="cmdVerde" id="cmdSalir" data-display="pbxSalirApp" data-closeBGclick="false" class="button">Salir</button>
 
             <!--
             <p>Slidebar with id 'slidebar-2' on the right side and shift style.</p>
@@ -82,6 +82,12 @@
         </div>
         <a href="#" id="lnkPbxCargando" data-display="pbxCargando" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando</a>
 
+        <div id="pbxSalirApp" class="portBox">
+            <p>¿Desea salir de la aplicación?</p>
+
+            <button id="cmdConfirmarSalir" class="cmdVerde">Salir</button>
+            <button class="cmdVerde close-portBox">Cancelar</button>
+        </div>
 
         <script type="text/javascript" src="cordova.js"></script>
     </body>

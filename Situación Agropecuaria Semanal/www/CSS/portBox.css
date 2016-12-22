@@ -35,11 +35,16 @@
 }
 
 .close-portBox, .lnkVolverSeleccion{
-		position: absolute;
-		top: -6px;
-		right: -3px;
-		padding:5px;
-		overflow:visible;
+	position: absolute;
+	top: -6px;
+	right: -3px;
+	padding:5px;
+	overflow:visible;
+}
+
+#pbxSalirApp .close-portBox{
+	top: 0px !important;
+	right: 0px !important;
 }
 
 .close-portBox img, .lnkVolverSeleccion img{

@@ -124,6 +124,26 @@ header{
 	background: #8BD475;
 }
 
+
+/* ------- PortBox Salir ------- */
+
+#pbxSalirApp .lnkVolverSeleccion{
+	display: none;
+}
+
+#pbxSalirApp .cmdVerde{
+	width: 40%;
+	text-align: center;
+}
+
+#pbxSalirApp .cmdVerde:nth-child(1){
+	float: left;
+}
+
+#pbxSalirApp .cmdVerde:nth-child(2){
+	float: right;
+}
+
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* Portboxes */
 

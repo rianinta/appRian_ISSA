@@ -30,8 +30,12 @@ $(function(){
 	
 
 	$("#cmdSalir").click(function(){
-
+		cmdSalir_click()
 	})
+
+	$("#cmdConfirmarSalir").click(function(){
+		navigator.app.exitApp();
+	});
 
 	
 
@@ -144,6 +148,11 @@ function cmdNuevaConsulta_click(){
 	$("#lnkPbSeleccionVariable").click()
 
 	$("#divPbxSeleccionVariable .lnkVolverSeleccion").hide()
+}
+
+function cmdSalir_click(){
+	//El PortBox se dispara solo, aca cierro el menú lateral
+	controller.close()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
