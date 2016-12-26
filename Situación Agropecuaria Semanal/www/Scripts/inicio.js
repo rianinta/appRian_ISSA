@@ -32,6 +32,12 @@ $(function(){
 	    lnkContinuarSeleccionVariable_click($("#cboVariable").val())
 	});
 
+	$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
+	    lnkContinuarSeleccionAño_click($("#cboVariable").val())
+	});
+
+	
+
 
 	/*$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
 	    cmdVariable_click($(this).data("idvar"))
@@ -243,7 +249,7 @@ function CargoAños(response){
 
     var htmlDivPbx
 	//htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Seleccione el año</p>' + htmlBotones + '</div><a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
-	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Variable elegida</p><p>' + TextoVariableSeleccionada + '</p><hr/>' 
+	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Información elegida</p>' + TextoVariableSeleccionada + '<br/><br/>' 
 	htmlDivPbx = htmlDivPbx + '<p class="H2_pb">¿Que fecha desea consultar?</p>' + htmlListadoAños
 	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkContinuarSeleccionAño">Continuar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a></div>'
 	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
@@ -252,7 +258,7 @@ function CargoAños(response){
 	$("#lnkPbSeleccionAño").click()	
 }
 
-function cmdSeleccionAño_click(pAño){
+function lnkContinuarSeleccionAño_click(pAño){
 	//Acomodo interfaz
 	$("#divPbxSeleccionAño .close-portBox").click();
 	$("#lnkPbxCargando").click();
@@ -287,7 +293,7 @@ function CargoMeses(response){
 	//Cierro el Portbox Cargando
 	$("#pbxCargando .close-portBox").click()
 
-	alert(response.d)
+	alert(response.d + "asdasdasds")
 }
 
 
