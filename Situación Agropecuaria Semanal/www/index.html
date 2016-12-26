@@ -57,7 +57,13 @@
             <button class="cmdVerde">Guardar mapa</button>
             <button class="cmdVerde">Cargar mapa</button>
             <button class="cmdVerde" id="cmdSalir" data-display="pbxSalirApp" data-closeBGclick="false" class="button">Salir</button>
-
+            
+             <select class="cboApp">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+            </select> 
             <!--
             <p>Slidebar with id 'slidebar-2' on the right side and shift style.</p>
             <ul>
@@ -73,14 +79,17 @@
 
         <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- PORTBOXES -->
-        
-        <div id="divPbxSeleccionVariable">
-        </div>
-        
+
         <div id="pbxCargando" class="portBox">
             <img src="Imagenes/loading.svg" alt="" align="absmiddle">&nbsp;<span>Cargando...</span>
         </div>
         <a href="#" id="lnkPbxCargando" data-display="pbxCargando" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando</a>
+        
+        <div id="divPbxSeleccionVariable">
+        </div>
+        
+        <div id="divPbxSeleccionAño">
+        </div>
 
         <div id="pbxSalirApp" class="portBox">
             <p>¿Desea salir de la aplicación?</p>

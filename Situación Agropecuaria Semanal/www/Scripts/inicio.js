@@ -6,6 +6,11 @@ var geoXml;
 
 var controller;
 
+var VariableSeleccionada = 0
+var AñoSeleccionado = 0
+var MesSeleccionado = 0
+var SemanaConsultada
+
 $(function(){
 	/////////////////////////////////////////////
 	//Splash
@@ -25,7 +30,13 @@ $(function(){
 	    cmdVariable_click($(this).data("idvar"))
 	});
 
+	$('body').on('click', '#divPbxSeleccionAño .cmdVerde', function() {
+	    cmdSeleccionAño_click($(this).data("anio"))
+	});
 
+	$('body').on('click', '#divPbxSeleccionAño .lnkVolverSeleccion', function() {
+	    cmdSeleccionAño_volver_click()
+	});
 
 	
 
@@ -36,13 +47,6 @@ $(function(){
 	$("#cmdConfirmarSalir").click(function(){
 		navigator.app.exitApp();
 	});
-
-	
-
-	$('body').on('click', '#pbxSeleccionVariable .lnkVolverSeleccion', function() {
-	    alert("Volviendo!")
-	});
-
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,18 +162,86 @@ function cmdSalir_click(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Eventos selección consulta
 function cmdVariable_click(pIdVar){
-	//alert("Elegiste " + pIdVar)
+	//Acomodo interfaz
 	$("#divPbxSeleccionVariable .close-portBox").click();
 	$("#lnkPbxCargando").click();
 
 	$("#pbxCargando .lnkVolverSeleccion").hide()
 	$("#pbxCargando .close-portBox").hide()
+
+	VariableSeleccionada = pIdVar
+
+	//Busco los años
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeAnios",
+        data: '{pIdVariable: "' + VariableSeleccionada + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: CargoAños,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("Error en la llamada")
+        }
+    });
 }
 
+function CargoAños(response){
+	//Cierro el Portbox Cargando
+	$("#pbxCargando .close-portBox").click()
 
+	var datos = jQuery.parseJSON(response.d);
+	var htmlBotones = ""
 
+    $.each(datos, function(index, Valores) {
+        //MuestroLalala = MuestroLalala + "(" + Valores.IdCultivo + ") " + Valores.Cultivo + "|"
+        htmlBotones = htmlBotones + '<button class="cmdVerde" data-anio="' + Valores.Anio + '">' + Valores.Anio + '</button>'
+    });
 
+    var htmlDivPbx
+	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Seleccione el año</p>' + htmlBotones + '</div><a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
 
+	$("#divPbxSeleccionAño").html(htmlDivPbx)
+	$("#lnkPbSeleccionAño").click()	
+}
+
+function cmdSeleccionAño_click(pAño){
+	//Acomodo interfaz
+	$("#divPbxSeleccionAño .close-portBox").click();
+	$("#lnkPbxCargando").click();
+
+	$("#pbxCargando .lnkVolverSeleccion").hide()
+	$("#pbxCargando .close-portBox").hide()
+
+	AñoSeleccionado = pAño
+
+	//Busco los meses
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeMeses",
+        data: '{pIdVariable: "' + VariableSeleccionada + '", pAnio: "' + AñoSeleccionado + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: CargoMeses,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("Error en la llamada")
+        }
+    });
+}
+
+function cmdSeleccionAño_volver_click(){
+	AñoSeleccionado = 0
+	$("#divPbxSeleccionAño .close-portBox").click();
+	$("#lnkPbSeleccionVariable").click()
+}
+
+function CargoMeses(response){
+	//Cierro el Portbox Cargando
+	$("#pbxCargando .close-portBox").click()
+
+	alert(response.d)
+}
 
 
 
