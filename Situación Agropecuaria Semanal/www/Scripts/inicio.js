@@ -7,9 +7,11 @@ var geoXml;
 var controller;
 
 var VariableSeleccionada = 0
+var TextoVariableSeleccionada = ""
 var AñoSeleccionado = 0
 var MesSeleccionado = 0
 var SemanaConsultada
+var htmlListadoAños = ""
 
 $(function(){
 	/////////////////////////////////////////////
@@ -26,7 +28,12 @@ $(function(){
 		cmdNuevaConsulta_click()
 	});
 
-	$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
+	$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionVariable', function() {
+	    lnkContinuarSeleccionVariable_click($("#cboVariable").val())
+	});
+
+
+	/*$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
 	    cmdVariable_click($(this).data("idvar"))
 	});
 
@@ -36,9 +43,11 @@ $(function(){
 
 	$('body').on('click', '#divPbxSeleccionAño .lnkVolverSeleccion', function() {
 	    cmdSeleccionAño_volver_click()
-	});
+	});*/
 
 	
+
+
 
 	$("#cmdSalir").click(function(){
 		cmdSalir_click()
@@ -146,7 +155,33 @@ function cmdNuevaConsulta_click(){
 	controller.close()
 
 	var htmlDivPbx
-	htmlDivPbx = '<div id="pbxSeleccionVariable" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">¿Qué información desea consultar?</p><button class="cmdVerde" data-idvar="1">Trigo</button><button class="cmdVerde" data-idvar="2">Maíz</button><button class="cmdVerde" data-idvar="24">Maíz tardío</button><button class="cmdVerde" data-idvar="3">Girasol</button><button class="cmdVerde" data-idvar="4">Soja</button><button class="cmdVerde" data-idvar="23">Soja 2º</button><button class="cmdVerde" data-idvar="5">Algodón</button><button class="cmdVerde" data-idvar="11">Oferta forrajera bovinos</button><button class="cmdVerde" data-idvar="12">Estado rodeos bovinos</button><button class="cmdVerde" data-idvar="15">Oferta forrajera ovinos/caprinos</button><button class="cmdVerde" data-idvar="16">Estado rodeos ovinos/caprinos</button><button class="cmdVerde" data-idvar="13">Tabaco</button><button class="cmdVerde" data-idvar="14">Caña de azucar</button><button class="cmdVerde" data-idvar="19">Vid</button><button class="cmdVerde" data-idvar="17">Arroz</button><button class="cmdVerde" data-idvar="18">Maní</button><button class="cmdVerde" data-idvar="8">Pepita y Carozo</button><button class="cmdVerde" data-idvar="7">Cítricos</button><button class="cmdVerde" data-idvar="9">Olivos</button><button class="cmdVerde" data-idvar="6">Porotos</button><button class="cmdVerde" data-idvar="10">Forestales</button><button class="cmdVerde" data-idvar="21">Cebada</button><button class="cmdVerde" data-idvar="22">Sorgo</button></div><a href="#" id="lnkPbSeleccionVariable" data-display="pbxSeleccionVariable" data-closeBGclick="false" class="button" style="display: none;">#</a>'
+	htmlDivPbx = '<div id="pbxSeleccionVariable" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">¿Qué información desea consultar?</p>'
+	htmlDivPbx = htmlDivPbx + '<select id="cboVariable" class="cboApp"><option value="0">-Seleccione una opción-</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="1">Trigo</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="2">Maíz</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="24">Maíz tardío</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="3">Girasol</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="4">Soja</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="23">Soja 2º</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="5">Algodón</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="11">Oferta forrajera bovinos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="12">Estado rodeos bovinos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="15">Oferta forrajera ovinos/caprinos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="16">Estado rodeos ovinos/caprinos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="13">Tabaco</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="14">Caña de azucar</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="19">Vid</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="17">Arroz</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="18">Maní</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="8">Pepita y Carozo</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="7">Cítricos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="9">Olivos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="6">Porotos</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="10">Forestales</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="21">Cebada</option>'
+	htmlDivPbx = htmlDivPbx + '<option value="22">Sorgo</option></select>'
+	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkContinuarSeleccionVariable">Continuar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a>'
+	htmlDivPbx = htmlDivPbx + '</div><a href="#" id="lnkPbSeleccionVariable" data-display="pbxSeleccionVariable" data-closeBGclick="false" class="button" style="display: none;">#</a>'
 
 	$("#divPbxSeleccionVariable").html(htmlDivPbx)
 	$("#lnkPbSeleccionVariable").click()
@@ -161,29 +196,34 @@ function cmdSalir_click(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Eventos selección consulta
-function cmdVariable_click(pIdVar){
-	//Acomodo interfaz
-	$("#divPbxSeleccionVariable .close-portBox").click();
-	$("#lnkPbxCargando").click();
+function lnkContinuarSeleccionVariable_click(pIdVar){
+	if(pIdVar != 0){
+		//Acomodo interfaz
+		$("#divPbxSeleccionVariable .close-portBox").click();
+		$("#lnkPbxCargando").click();
 
-	$("#pbxCargando .lnkVolverSeleccion").hide()
-	$("#pbxCargando .close-portBox").hide()
+		$("#pbxCargando .lnkVolverSeleccion").hide()
+		$("#pbxCargando .close-portBox").hide()
 
-	VariableSeleccionada = pIdVar
+		VariableSeleccionada = pIdVar
+		TextoVariableSeleccionada = $("#cboVariable option:selected").text();
 
-	//Busco los años
-	$.ajax({
-        type: "POST",
-        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeAnios",
-        data: '{pIdVariable: "' + VariableSeleccionada + '"}',
-        cache: false,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: CargoAños,
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        	alert("Error en la llamada")
-        }
-    });
+		//Busco los años
+		$.ajax({
+	        type: "POST",
+	        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeAnios",
+	        data: '{pIdVariable: "' + VariableSeleccionada + '"}',
+	        cache: false,
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: CargoAños,
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	        	alert("Error en la llamada")
+	        }
+	    });
+	}else{
+		alert("Seleccione un elemento de la lista")
+	}
 }
 
 function CargoAños(response){
@@ -191,15 +231,22 @@ function CargoAños(response){
 	$("#pbxCargando .close-portBox").click()
 
 	var datos = jQuery.parseJSON(response.d);
-	var htmlBotones = ""
+	htmlListadoAños = "<select id='cboAño' class='cboApp'><option value='0'>-Seleccione un año-</option>"
 
     $.each(datos, function(index, Valores) {
         //MuestroLalala = MuestroLalala + "(" + Valores.IdCultivo + ") " + Valores.Cultivo + "|"
-        htmlBotones = htmlBotones + '<button class="cmdVerde" data-anio="' + Valores.Anio + '">' + Valores.Anio + '</button>'
+        //htmlBotones = htmlBotones + '<button class="cmdVerde" data-anio="' + Valores.Anio + '">' + Valores.Anio + '</button>'
+        htmlListadoAños = htmlListadoAños + '<option value="' + Valores.Anio + '">' + Valores.Anio + '</option>'       
     });
 
+    htmlListadoAños = htmlListadoAños + '</select>'
+
     var htmlDivPbx
-	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Seleccione el año</p>' + htmlBotones + '</div><a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
+	//htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Seleccione el año</p>' + htmlBotones + '</div><a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
+	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Variable elegida</p><p>' + TextoVariableSeleccionada + '</p><hr/>' 
+	htmlDivPbx = htmlDivPbx + '<p class="H2_pb">¿Que fecha desea consultar?</p>' + htmlListadoAños
+	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkContinuarSeleccionAño">Continuar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a></div>'
+	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
 
 	$("#divPbxSeleccionAño").html(htmlDivPbx)
 	$("#lnkPbSeleccionAño").click()	

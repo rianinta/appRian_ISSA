@@ -36,6 +36,7 @@ img {
 	padding: 10px;
 	color: white;
 	background-color: #53983F;
+	width: 100%;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -133,6 +134,11 @@ header{
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* Portboxes */
+.portBox a{float: right; margin-top: 15px;}
+.portBox a:link{ color: white; text-decoration: none;}
+.portBox a:active{ color: white; text-decoration: none;}
+.portBox a:visited{ color: white; text-decoration: none;}
+.portBox a:hover{ color: white; text-decoration: none;}
 
 .H1_pb{
 	font-size: 30px;
@@ -149,6 +155,11 @@ header{
 #pbxSeleccionAño .close-portBox{
 	top: 3px !important;
 	right: 3px !important;
+}
+
+.imgIconos{
+	width: 25px;
+	margin-left: 5px;
 }
 
 /* ------- PortBox Salir ------- */
