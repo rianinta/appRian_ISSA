@@ -37,6 +37,7 @@ img {
 	color: white;
 	background-color: #53983F;
 	width: 100%;
+	margin-bottom: 8px;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -134,7 +135,7 @@ header{
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* Portboxes */
-.portBox a{float: right; margin-top: 15px;}
+.portBox a{float: right; margin-top: 10px;}
 .portBox a:link{ color: white; text-decoration: none;}
 .portBox a:active{ color: white; text-decoration: none;}
 .portBox a:visited{ color: white; text-decoration: none;}
