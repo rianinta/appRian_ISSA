@@ -28,17 +28,14 @@ $(function(){
 		cmdNuevaConsulta_click()
 	});
 
-	$('body').on('click', '#divPbxSeleccionVariable #lnkContinuarSeleccionVariable', function() {
+	$('body').on('click', '#divPbxSeleccionConsulta #lnkConsultar', function() {
 	    //lnkContinuarSeleccionVariable_click($("#cboVariable").val())
-	    //alert("Continuo!")
-	    $("#TituloQueFechaDesea").show();
-		$("#cboAño").show();
-		$("#cboMes").show();
-		$("#cboSemana").show();
+	    alert("Consulto")
 	});
 
-	$("#cboAñosLalala").change(function(){
-		if($(this).val() == 0){
+	$("#cboVariable").change(function(){
+		cboVariable_change($(this).val())
+		/*if($(this).val() == 0){
 			alert("Cero")
 			$('#lnkContinuarSeleccionVariable').bind('click', false);
 			$('#lnkContinuarSeleccionVariable').css("opacity","0.3")
@@ -46,15 +43,18 @@ $(function(){
 			alert("Uno")
 			$('#lnkContinuarSeleccionVariable').unbind('click', false);
 			$('#lnkContinuarSeleccionVariable').css("opacity","1")
-		}
+		}*/
 	});
 
-	$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
+	$("#cboAño").change(function(){
+		cboAño_change($(this).val());
+	});
+
+	/*$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
 	    lnkContinuarSeleccionAño_click($("#cboVariable").val())
 	});
 
-
-	/*$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
+	$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
 	    cmdVariable_click($(this).data("idvar"))
 	});
 
@@ -175,56 +175,16 @@ function InicializarMenu(){
 function cmdNuevaConsulta_click(){
 	controller.close()
 
-	$("#lnkPbSeleccionVariable").click()
-
-	/*var htmlDivPbx
-	htmlDivPbx = '<div id="pbxSeleccionVariable" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">¿Qué información desea consultar?</p>'
-	htmlDivPbx = htmlDivPbx + '<select id="cboVariable" class="cboApp"><option value="0">-Seleccione una opción-</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="1">Trigo</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="2">Maíz</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="24">Maíz tardío</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="3">Girasol</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="4">Soja</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="23">Soja 2º</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="5">Algodón</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="11">Oferta forrajera bovinos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="12">Estado rodeos bovinos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="15">Oferta forrajera ovinos/caprinos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="16">Estado rodeos ovinos/caprinos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="13">Tabaco</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="14">Caña de azucar</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="19">Vid</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="17">Arroz</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="18">Maní</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="8">Pepita y Carozo</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="7">Cítricos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="9">Olivos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="6">Porotos</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="10">Forestales</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="21">Cebada</option>'
-	htmlDivPbx = htmlDivPbx + '<option value="22">Sorgo</option></select>'
-	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkContinuarSeleccionVariable">Continuar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a>'
-	htmlDivPbx = htmlDivPbx + '</div><a href="#" id="lnkPbSeleccionVariable" data-display="pbxSeleccionVariable" data-closeBGclick="false" class="button" style="display: none;">#</a>'
-
-	$("#divPbxSeleccionVariable").html(htmlDivPbx)
-	$("#lnkPbSeleccionVariable").click()*/
-
-
-	/*$("#TituloQueFechaDesea").css("visibility","hidden")
-	$("#cboAño").css("visibility","hidden")
-	$("#cboMes").css("visibility","hidden")
-	$("#cboSemana").css("visibility","hidden")*/
-
-	alert("Se muestran")
+	$("#lnkPbSeleccionConsulta").click()
 
 	$("#TituloQueFechaDesea").hide();
 	$("#cboAño").hide();
 	$("#cboMes").hide();
 	$("#cboSemana").hide();
+	$("#divCargando").hide();
 
-	alert("Ahora no")
-	
-	//$("#divPbxSeleccionVariable .lnkVolverSeleccion").hide()
+	$('#lnkConsultar').bind('click', false);
+	$('#lnkConsultar').css("opacity","0.3")
 }
 
 function cmdSalir_click(){
@@ -234,17 +194,14 @@ function cmdSalir_click(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Eventos selección consulta
-function lnkContinuarSeleccionVariable_click(pIdVar){
-	if(pIdVar != 0){
-		//Acomodo interfaz
-		$("#divPbxSeleccionVariable .close-portBox").click();
-		$("#lnkPbxCargando").click();
 
-		$("#pbxCargando .lnkVolverSeleccion").hide()
-		$("#pbxCargando .close-portBox").hide()
+function cboVariable_change(pIdVar){
+	if(pIdVar != 0){
+		//Seleccionó una variable
+		$("#cboVariable").prop("disabled", true);
+		$("#divCargando").show();
 
 		VariableSeleccionada = pIdVar
-		TextoVariableSeleccionada = $("#cboVariable option:selected").text();
 
 		//Busco los años
 		$.ajax({
@@ -260,37 +217,191 @@ function lnkContinuarSeleccionVariable_click(pIdVar){
 	        }
 	    });
 	}else{
-		alert("Seleccione un elemento de la lista")
+		$("#TituloQueFechaDesea").hide();
+		$("#cboAño").hide();
+		$("#cboMes").hide();
+		$("#cboSemana").hide();
+		$("#divCargando").hide();
+
+		$('#lnkConsultar').bind('click', false);
+		$('#lnkConsultar').css("opacity","0.3")
 	}
 }
 
 function CargoAños(response){
-	//Cierro el Portbox Cargando
-	$("#pbxCargando .close-portBox").click()
+	$("#divCargando").hide();
 
-	/*var datos = jQuery.parseJSON(response.d);
-	htmlListadoAños = "<select id='cboAño' class='cboApp'><option value='0'>-Seleccione un año-</option>"
+	$('#cboAño').empty();
+	$('#cboAño').append($('<option>', {
+	    value: 0,
+	    text: '-Seleccione un año-'
+	}));
 
-    $.each(datos, function(index, Valores) {
-        //MuestroLalala = MuestroLalala + "(" + Valores.IdCultivo + ") " + Valores.Cultivo + "|"
-        //htmlBotones = htmlBotones + '<button class="cmdVerde" data-anio="' + Valores.Anio + '">' + Valores.Anio + '</button>'
-        htmlListadoAños = htmlListadoAños + '<option value="' + Valores.Anio + '">' + Valores.Anio + '</option>'       
+	var datos = jQuery.parseJSON(response.d);
+
+	$.each(datos, function(index, Valores) {
+        $('#cboAño').append($('<option>', {
+		    value: Valores.Anio,
+		    text: Valores.Anio
+		}));
     });
 
-    htmlListadoAños = htmlListadoAños + '</select>'
-
-    var htmlDivPbx
-	//htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Seleccione el año</p>' + htmlBotones + '</div><a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
-	htmlDivPbx = '<div id="pbxSeleccionAño" class="portBox"><p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">Información elegida</p>' + TextoVariableSeleccionada + '<br/><br/>' 
-	htmlDivPbx = htmlDivPbx + '<p class="H2_pb">¿Que fecha desea consultar?</p>' + htmlListadoAños
-	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkContinuarSeleccionAño">Continuar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a></div>'
-	htmlDivPbx = htmlDivPbx + '<a href="#" id="lnkPbSeleccionAño" data-display="pbxSeleccionAño" data-closeBGclick="false" class="button" style="display: none;">#</a>'
-
-	$("#divPbxSeleccionAño").html(htmlDivPbx)
-	$("#lnkPbSeleccionAño").click()	*/
+	$("#TituloQueFechaDesea").show();
+	$('#cboAño').show()
 }
 
-function lnkContinuarSeleccionAño_click(pAño){
+function cboAño_change(pAño){
+	if(pAño != 0){
+		//Seleccionó un año
+		$("#cboVariable").prop("disabled", true);
+		$("#cboAño").prop("disabled", true);
+		$("#divCargando").show();
+
+		AñoSeleccionado = pAño
+
+		//Busco los meses
+		$.ajax({
+	        type: "POST",
+	        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeMeses",
+	        data: '{pIdVariable: "' + VariableSeleccionada + '", pAnio: "' + AñoSeleccionado + '"}',
+	        cache: false,
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: CargoMeses,
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	        	alert("Error en la llamada")
+	        }
+	    });
+	}else{
+		$("#cboMes").hide();
+		$("#cboSemana").hide();
+		$("#divCargando").hide();
+
+		$('#lnkConsultar').bind('click', false);
+		$('#lnkConsultar').css("opacity","0.3")
+	}
+}
+
+function CargoMeses(response){
+	//alert(response.d)
+
+	$("#divCargando").hide();
+
+	$('#cboMes').empty();
+	$('#cboMes').append($('<option>', {
+	    value: 0,
+	    text: '-Seleccione un mes-'
+	}));
+
+	var datos = jQuery.parseJSON(response.d);
+
+	$.each(datos, function(index, Valores) {
+        $('#cboMes').append($('<option>', {
+		    value: Valores.Mes,
+		    text: DevuelveMes(Valores.Mes)
+		}));
+    });
+
+	$('#cboMes').show()
+}
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Funciones varias
+function DevuelveMes(pNumMes){
+	var NombreMes = "Lucas " + pNumMes
+
+
+	switch(pNumMes) {
+	    case "1":
+	        NombreMes = "Enero"
+	        break;
+	    case "2":
+	        NombreMes = "Febrero"
+	        break;
+	    case "3":
+	        NombreMes = "Marzo"
+	        break;
+	    case "4":
+	        NombreMes = "Abril"
+	        break;
+	    case "5":
+	        NombreMes = "Mayo"
+	        break;
+	    case "6":
+	        NombreMes = "Junio"
+	        break;
+	    case "7":
+	        NombreMes = "Julio"
+	        break;
+	    case "8":
+	        NombreMes = "Agosto"
+	        break;
+	    case "9":
+	        NombreMes = "Septiembre"
+	        break;
+	    case "10":
+	        NombreMes = "Octubre"
+	        break;
+	    case "11":
+	        NombreMes = "Noviembre"
+	        break;
+	    case "12":
+	        NombreMes = "Diciembre"
+	        break;
+	} 
+	/*switch(pNumMes) {
+	    case 1:
+	        NombreMes "Enero"
+	        break;
+	    case 2:
+	        NombreMes "Febrero"
+	        break;
+		case 3:
+	        NombreMes "Marzo"
+	        break;
+	    case 4:
+	        NombreMes "Abril"
+	        break;
+	    case 5:
+	        NombreMes "Mayo"
+	        break;
+	    case 6:
+	        NombreMes "Junio"
+	        break;
+	    case 7:
+	        NombreMes "Julio"
+	        break;
+		case 8:
+	        NombreMes "Agosto"
+	        break;
+	    case 9:
+	        NombreMes "Septiembre"
+	        break;
+	    case 10:
+	        NombreMes "Octubre"
+	        break;
+	    case 11:
+	        NombreMes "Noviembre"
+	        break;
+	    case 12:
+	        NombreMes "Diciembre"
+	        break;
+	}*/
+
+	return NombreMes
+}
+
+
+
+
+
+/*function lnkContinuarSeleccionAño_click(pAño){
 	//Acomodo interfaz
 	$("#divPbxSeleccionAño .close-portBox").click();
 	$("#lnkPbxCargando").click();
@@ -313,7 +424,7 @@ function lnkContinuarSeleccionAño_click(pAño){
         	alert("Error en la llamada")
         }
     });
-}
+}*/
 
 function cmdSeleccionAño_volver_click(){
 	AñoSeleccionado = 0
@@ -321,12 +432,6 @@ function cmdSeleccionAño_volver_click(){
 	$("#lnkPbSeleccionVariable").click()
 }
 
-function CargoMeses(response){
-	//Cierro el Portbox Cargando
-	$("#pbxCargando .close-portBox").click()
-
-	alert(response.d + "asdasdasds")
-}
 
 
 
