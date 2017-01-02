@@ -28,11 +28,6 @@ $(function(){
 		cmdNuevaConsulta_click()
 	});
 
-	$('body').on('click', '#divPbxSeleccionConsulta #lnkConsultar', function() {
-	    //lnkContinuarSeleccionVariable_click($("#cboVariable").val())
-	    alert("Consulto")
-	});
-
 	$("#cboVariable").change(function(){
 		cboVariable_change($(this).val())
 		/*if($(this).val() == 0){
@@ -48,6 +43,15 @@ $(function(){
 
 	$("#cboAño").change(function(){
 		cboAño_change($(this).val());
+	});
+
+	$("#cboMes").change(function(){
+		cboMes_change($(this).val());
+	});
+
+	$('body').on('click', '#divPbxSeleccionConsulta #lnkConsultar', function() {
+	    //lnkContinuarSeleccionVariable_click($("#cboVariable").val())
+	    alert("Consulto")
 	});
 
 	/*$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
@@ -196,6 +200,13 @@ function cmdSalir_click(){
 //Eventos selección consulta
 
 function cboVariable_change(pIdVar){
+	$("#cboMes").hide();
+	$("#cboSemana").hide();
+	$("#divCargando").hide();
+
+	$('#lnkConsultar').bind('click', false);
+	$('#lnkConsultar').css("opacity","0.3")
+
 	if(pIdVar != 0){
 		//Seleccionó una variable
 		$("#cboVariable").prop("disabled", true);
@@ -219,12 +230,6 @@ function cboVariable_change(pIdVar){
 	}else{
 		$("#TituloQueFechaDesea").hide();
 		$("#cboAño").hide();
-		$("#cboMes").hide();
-		$("#cboSemana").hide();
-		$("#divCargando").hide();
-
-		$('#lnkConsultar').bind('click', false);
-		$('#lnkConsultar').css("opacity","0.3")
 	}
 }
 
@@ -246,8 +251,9 @@ function CargoAños(response){
 		}));
     });
 
+	$("#cboVariable").prop("disabled", false);
 	$("#TituloQueFechaDesea").show();
-	$('#cboAño').show()
+	$('#cboAño').show();
 }
 
 function cboAño_change(pAño){
@@ -283,8 +289,6 @@ function cboAño_change(pAño){
 }
 
 function CargoMeses(response){
-	//alert(response.d)
-
 	$("#divCargando").hide();
 
 	$('#cboMes').empty();
@@ -302,20 +306,77 @@ function CargoMeses(response){
 		}));
     });
 
+	$("#cboVariable").prop("disabled", false);
+	$("#cboAño").prop("disabled", false);
+	$("#cboMes").prop("disabled", false);
 	$('#cboMes').show()
 }
 
+function cboMes_change(pMes){
+	if(pMes != 0){
+		//Seleccionó un mes
+		$("#cboVariable").prop("disabled", true);
+		$("#cboAño").prop("disabled", true);
+		$("#cboMes").prop("disabled", true);
+		$("#divCargando").show();
 
+		MesSeleccionado = pMes
 
+		//Busco las semanas
+		$.ajax({
+	        type: "POST",
+	        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeSemanas",
+	        data: '{pIdVariable: "' + VariableSeleccionada + '", pAnio: "' + AñoSeleccionado + '", pMes: "' + MesSeleccionado + '"}',
+	        cache: false,
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: CargoSemanas,
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	        	alert("Error en la llamada")
+	        }
+	    });
+	}else{
+		$("#cboSemana").hide();
+		$("#divCargando").hide();
 
+		$('#lnkConsultar').bind('click', false);
+		$('#lnkConsultar').css("opacity","0.3")
+	}
+}
 
+function CargoSemanas(response){
+	//alert(response.d)
+
+	$("#divCargando").hide();
+
+	$('#cboSemana').empty();
+	$('#cboSemana').append($('<option>', {
+	    value: 0,
+	    text: '-Seleccione una semana-'
+	}));
+
+	var datos = jQuery.parseJSON(response.d);
+
+	$.each(datos, function(index, Valores) {
+        $('#cboSemana').append($('<option>', {
+		    value: Valores.Fecha,
+		    text: Valores.Fecha
+		}));
+    });
+
+	$("#cboVariable").prop("disabled", false);
+	$("#cboAño").prop("disabled", false);
+	$("#cboMes").prop("disabled", false);
+	$("#cboSemana").prop("disabled", false);
+	$('#cboSemana').show()
+	
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funciones varias
 function DevuelveMes(pNumMes){
-	var NombreMes = "Lucas " + pNumMes
-
+	var NombreMes = ""
 
 	switch(pNumMes) {
 	    case "1":
@@ -354,45 +415,7 @@ function DevuelveMes(pNumMes){
 	    case "12":
 	        NombreMes = "Diciembre"
 	        break;
-	} 
-	/*switch(pNumMes) {
-	    case 1:
-	        NombreMes "Enero"
-	        break;
-	    case 2:
-	        NombreMes "Febrero"
-	        break;
-		case 3:
-	        NombreMes "Marzo"
-	        break;
-	    case 4:
-	        NombreMes "Abril"
-	        break;
-	    case 5:
-	        NombreMes "Mayo"
-	        break;
-	    case 6:
-	        NombreMes "Junio"
-	        break;
-	    case 7:
-	        NombreMes "Julio"
-	        break;
-		case 8:
-	        NombreMes "Agosto"
-	        break;
-	    case 9:
-	        NombreMes "Septiembre"
-	        break;
-	    case 10:
-	        NombreMes "Octubre"
-	        break;
-	    case 11:
-	        NombreMes "Noviembre"
-	        break;
-	    case 12:
-	        NombreMes "Diciembre"
-	        break;
-	}*/
+	}
 
 	return NombreMes
 }
