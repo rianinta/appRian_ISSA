@@ -153,9 +153,14 @@ header{
 	margin: 0px 0px 5px 0px;
 }
 
-#pbxSeleccionAño .close-portBox{
+/*#pbxSeleccionAño .close-portBox{
 	top: 3px !important;
 	right: 3px !important;
+}*/
+
+#divPbxSeleccionConsulta .cboApp{
+	/*width: auto;*/
+	display: block;
 }
 
 .imgIconos{

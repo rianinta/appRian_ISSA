@@ -6,10 +6,10 @@ var geoXml;
 
 var controller;
 
-var VariableSeleccionada = 0
+var VariableSeleccionada
 var TextoVariableSeleccionada = ""
-var AñoSeleccionado = 0
-var MesSeleccionado = 0
+var AñoSeleccionado
+var MesSeleccionado
 var SemanaConsultada
 var htmlListadoAños = ""
 
@@ -49,10 +49,19 @@ $(function(){
 		cboMes_change($(this).val());
 	});
 
-	$('body').on('click', '#divPbxSeleccionConsulta #lnkConsultar', function() {
+	$("#cboSemana").change(function(){
+		cboSemana_change($(this).val());
+	});
+
+	$("#lnkConsultar").click(function(){
+		lnkConsultar_click()
+	});
+
+
+	/*$('body').on('click', '#lnkConsultar', function() {
 	    //lnkContinuarSeleccionVariable_click($("#cboVariable").val())
 	    alert("Consulto")
-	});
+	});*/
 
 	/*$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
 	    lnkContinuarSeleccionAño_click($("#cboVariable").val())
@@ -207,6 +216,11 @@ function cboVariable_change(pIdVar){
 	$('#lnkConsultar').bind('click', false);
 	$('#lnkConsultar').css("opacity","0.3")
 
+	VariableSeleccionada = undefined
+	AñoSeleccionado = undefined
+	MesSeleccionado = undefined
+	SemanaConsultada = undefined
+
 	if(pIdVar != 0){
 		//Seleccionó una variable
 		$("#cboVariable").prop("disabled", true);
@@ -230,6 +244,8 @@ function cboVariable_change(pIdVar){
 	}else{
 		$("#TituloQueFechaDesea").hide();
 		$("#cboAño").hide();
+
+		VariableSeleccionada = undefined
 	}
 }
 
@@ -257,6 +273,16 @@ function CargoAños(response){
 }
 
 function cboAño_change(pAño){
+	$("#cboMes").hide();
+	$("#cboSemana").hide();
+
+	$('#lnkConsultar').bind('click', false);
+	$('#lnkConsultar').css("opacity","0.3")
+
+	AñoSeleccionado = undefined
+	MesSeleccionado = undefined
+	SemanaConsultada = undefined
+
 	if(pAño != 0){
 		//Seleccionó un año
 		$("#cboVariable").prop("disabled", true);
@@ -279,12 +305,7 @@ function cboAño_change(pAño){
 	        }
 	    });
 	}else{
-		$("#cboMes").hide();
-		$("#cboSemana").hide();
 		$("#divCargando").hide();
-
-		$('#lnkConsultar').bind('click', false);
-		$('#lnkConsultar').css("opacity","0.3")
 	}
 }
 
@@ -313,6 +334,14 @@ function CargoMeses(response){
 }
 
 function cboMes_change(pMes){
+	$("#cboSemana").hide();
+
+	$('#lnkConsultar').bind('click', false);
+	$('#lnkConsultar').css("opacity","0.3")
+
+	MesSeleccionado = undefined
+	SemanaConsultada = undefined
+
 	if(pMes != 0){
 		//Seleccionó un mes
 		$("#cboVariable").prop("disabled", true);
@@ -336,11 +365,7 @@ function cboMes_change(pMes){
 	        }
 	    });
 	}else{
-		$("#cboSemana").hide();
 		$("#divCargando").hide();
-
-		$('#lnkConsultar').bind('click', false);
-		$('#lnkConsultar').css("opacity","0.3")
 	}
 }
 
@@ -369,9 +394,27 @@ function CargoSemanas(response){
 	$("#cboMes").prop("disabled", false);
 	$("#cboSemana").prop("disabled", false);
 	$('#cboSemana').show()
-	
 }
 
+function cboSemana_change(pSemana){
+	if(pSemana != 0){
+		$('#lnkConsultar').bind('click', true);
+		$('#lnkConsultar').css("opacity","1")
+
+		SemanaConsultada = pSemana	
+	}else{
+		$('#lnkConsultar').bind('click', false);
+		$('#lnkConsultar').css("opacity","0.3")
+
+		SemanaConsultada = undefined
+	}
+}
+
+function lnkConsultar_click(){
+	if(VariableSeleccionada != undefined && AñoSeleccionado != undefined && MesSeleccionado != undefined && SemanaConsultada != undefined){
+		alert("Consulto")
+	}
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funciones varias
