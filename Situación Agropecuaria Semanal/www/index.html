@@ -80,46 +80,52 @@
         <a href="#" id="lnkPbxCargando" data-display="pbxCargando" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando</a>
         
         <div id="divPbxSeleccionConsulta" class="portBox">
-            <p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p><p class="H2_pb">¿Qué información desea consultar?</p>
-            <select id="cboVariable" class="cboApp">
-                <option value="0">-Seleccione una opción-</option>
-                <option value="1">Trigo</option>
-                <option value="2">Maíz</option>
-                <option value="24">Maíz tardío</option>
-                <option value="3">Girasol</option>
-                <option value="4">Soja</option>
-                <option value="23">Soja 2º</option>
-                <option value="5">Algodón</option>
-                <option value="11">Oferta forrajera bovinos</option>
-                <option value="12">Estado rodeos bovinos</option>
-                <option value="15">Oferta forrajera ovinos/caprinos</option>
-                <option value="16">Estado rodeos ovinos/caprinos</option>
-                <option value="13">Tabaco</option>
-                <option value="14">Caña de azucar</option>
-                <option value="19">Vid</option>
-                <option value="17">Arroz</option>
-                <option value="18">Maní</option>
-                <option value="8">Pepita y Carozo</option>
-                <option value="7">Cítricos</option>
-                <option value="9">Olivos</option>
-                <option value="6">Porotos</option>
-                <option value="10">Forestales</option>
-                <option value="21">Cebada</option>
-                <option value="22">Sorgo</option>
-            </select>
-            <br>
-            <p class="H2_pb" id="TituloQueFechaDesea">¿Qué fecha desea consultar?</p>
-            <select id="cboAño" class="cboApp">
-                <option value="0">-Seleccione una opción-</option>
-            </select>
-            <select id="cboMes" class="cboApp">
-                <option value="0">-Seleccione una opción-</option>
-            </select>
-            <select id="cboSemana" class="cboApp">
-                <option value="0">-Seleccione una opción-</option>
-            </select>
+            <p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p>
+            <div id="ControlesSeleccion">
+                <p class="H2_pb">¿Qué información desea consultar?</p>
+                <select id="cboVariable" class="cboApp">
+                    <option value="0">-Seleccione una opción-</option>
+                    <option value="1">Trigo</option>
+                    <option value="2">Maíz</option>
+                    <option value="24">Maíz tardío</option>
+                    <option value="3">Girasol</option>
+                    <option value="4">Soja</option>
+                    <option value="23">Soja 2º</option>
+                    <option value="5">Algodón</option>
+                    <option value="11">Oferta forrajera bovinos</option>
+                    <option value="12">Estado rodeos bovinos</option>
+                    <option value="15">Oferta forrajera ovinos/caprinos</option>
+                    <option value="16">Estado rodeos ovinos/caprinos</option>
+                    <option value="13">Tabaco</option>
+                    <option value="14">Caña de azucar</option>
+                    <option value="19">Vid</option>
+                    <option value="17">Arroz</option>
+                    <option value="18">Maní</option>
+                    <option value="8">Pepita y Carozo</option>
+                    <option value="7">Cítricos</option>
+                    <option value="9">Olivos</option>
+                    <option value="6">Porotos</option>
+                    <option value="10">Forestales</option>
+                    <option value="21">Cebada</option>
+                    <option value="22">Sorgo</option>
+                </select>
+                <br>
+                <p class="H2_pb" id="TituloQueFechaDesea">¿Qué fecha desea consultar?</p>
+                <select id="cboAño" class="cboApp">
+                    <option value="0">-Seleccione una opción-</option>
+                </select>
+                <select id="cboMes" class="cboApp">
+                    <option value="0">-Seleccione una opción-</option>
+                </select>
+                <select id="cboSemana" class="cboApp">
+                    <option value="0">-Seleccione una opción-</option>
+                </select>
+            </div>
             <div style="text-align:center; padding: 10px;" id="divCargando">
                 <img src="Imagenes/loading.svg" alt="" align="absmiddle">
+            </div>
+            <div id="txtCargandoMapa" style="text-align:center;">
+                Cargando mapa...
             </div>
             <a href="#" id="lnkConsultar">Consultar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a>
         </div>
