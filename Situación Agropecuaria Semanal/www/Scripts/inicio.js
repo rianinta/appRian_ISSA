@@ -195,7 +195,6 @@ function cmdNuevaConsulta_click(){
 	$("#cboMes").hide();
 	$("#cboSemana").hide();
 	$("#divCargando").hide();
-	$("#txtCargandoMapa").hide()
 	$("#ControlesSeleccion").show()
 
 	$('#lnkConsultar').bind('click', false);
@@ -418,12 +417,17 @@ function cboSemana_change(pSemana){
 function lnkConsultar_click(){
 	if(VariableSeleccionada != undefined && AñoSeleccionado != undefined && MesSeleccionado != undefined && SemanaConsultada != undefined){
 		//alert("Consulto")
-		$("#divCargando").show();
-		$("#txtCargandoMapa").show()
+		
+		/*$("#divCargando").show();
 
 		$("#divPbxSeleccionConsulta .close-portBox").hide()
 		$("#ControlesSeleccion").hide()
-		$("#lnkConsultar").hide()
+		$("#lnkConsultar").hide()*/
+
+		$("#divPbxSeleccionConsulta .close-portBox").click();
+		$("#lnkPbCargandoMapa").click();
+
+		$("#pbxCargandoMapa .close-portBox").hide();
 	}
 }
 
