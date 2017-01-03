@@ -152,6 +152,7 @@ function InicializarMapa(){
 
 function useTheData(doc) {
     console.log("Hola mapa!")
+    $("#pbxCargandoMapa .close-portBox").click();
 }
 
 function InicializarMenu(){
@@ -428,6 +429,9 @@ function lnkConsultar_click(){
 		$("#lnkPbCargandoMapa").click();
 
 		$("#pbxCargandoMapa .close-portBox").hide();
+
+		var ahora = new Date();
+		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime());
 	}
 }
 
@@ -477,42 +481,6 @@ function DevuelveMes(pNumMes){
 
 	return NombreMes
 }
-
-
-
-
-
-/*function lnkContinuarSeleccionAño_click(pAño){
-	//Acomodo interfaz
-	$("#divPbxSeleccionAño .close-portBox").click();
-	$("#lnkPbxCargando").click();
-
-	$("#pbxCargando .lnkVolverSeleccion").hide()
-	$("#pbxCargando .close-portBox").hide()
-
-	AñoSeleccionado = pAño
-
-	//Busco los meses
-	$.ajax({
-        type: "POST",
-        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeMeses",
-        data: '{pIdVariable: "' + VariableSeleccionada + '", pAnio: "' + AñoSeleccionado + '"}',
-        cache: false,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: CargoMeses,
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        	alert("Error en la llamada")
-        }
-    });
-}*/
-
-function cmdSeleccionAño_volver_click(){
-	AñoSeleccionado = 0
-	$("#divPbxSeleccionAño .close-portBox").click();
-	$("#lnkPbSeleccionVariable").click()
-}
-
 
 
 
