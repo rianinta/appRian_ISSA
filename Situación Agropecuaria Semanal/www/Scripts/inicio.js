@@ -146,13 +146,18 @@ function InicializarMapa(){
         singleInfoWindow: true,
         mapTypeControl: false,
         zoom: false,
-        afterParse: useTheData
+        afterParse: useTheData,
+        failedParse: errorParser
     });
 }
 
 function useTheData(doc) {
     console.log("Hola mapa!")
     $("#pbxCargandoMapa .close-portBox").click();
+}
+
+function errorParser() {
+    alert("Error parser mapa")
 }
 
 function InicializarMenu(){
@@ -417,22 +422,37 @@ function cboSemana_change(pSemana){
 
 function lnkConsultar_click(){
 	if(VariableSeleccionada != undefined && AñoSeleccionado != undefined && MesSeleccionado != undefined && SemanaConsultada != undefined){
-		//alert("Consulto")
-		
-		/*$("#divCargando").show();
-
-		$("#divPbxSeleccionConsulta .close-portBox").hide()
-		$("#ControlesSeleccion").hide()
-		$("#lnkConsultar").hide()*/
-
 		$("#divPbxSeleccionConsulta .close-portBox").click();
 		$("#lnkPbCargandoMapa").click();
 
 		$("#pbxCargandoMapa .close-portBox").hide();
 
+		LimpiarMapa()
+
 		var ahora = new Date();
-		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime());
+		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
 	}
+}
+
+function LimpiarMapa() {
+    if (geoXml.docs.length > 0) {
+        for (var k = 0; k < geoXml.docs.length - 1; k++) {
+            geoXml.docs.shift();
+        }
+
+        //Cierra cualquier infowindow abierto en el mapa
+	    if (geoXml.docs[0].gpolygons[0]) {
+	        geoXml.docs[0].gpolygons[0].infoWindow.close();
+	    }
+	    for (var i = geoXml.docs[0].gpolygons.length; i > 0; i--) {
+	        geoXml.docs[0].gpolygons[i - 1].setMap(null);
+	        geoXml.docs[0].gpolygons.pop();
+	    }
+	    for (var k = geoXml.docs[0].gpolylines.length; k > 0; k--) {
+	        geoXml.docs[0].gpolylines[k - 1].setMap(null);
+	        geoXml.docs[0].gpolylines.pop();
+	    }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
