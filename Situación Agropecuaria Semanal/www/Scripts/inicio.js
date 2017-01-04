@@ -136,6 +136,11 @@ function InicializarMapa(){
         center: new google.maps.LatLng(-40, -64),
         streetViewControl: false,
         zoom: 4,
+        zoomControl: true,
+	    zoomControlOptions: {
+	        position: google.maps.ControlPosition.LEFT_BOTTOM
+	    },
+        mapTypeControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -237,6 +242,7 @@ function cboVariable_change(pIdVar){
 		$("#divCargando").show();
 
 		VariableSeleccionada = pIdVar
+		TextoVariableSeleccionada = $("#cboVariable option:selected").text();
 
 		//Busco los años
 		$.ajax({
@@ -431,7 +437,18 @@ function lnkConsultar_click(){
 
 		var ahora = new Date();
 		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+
+		//$("#divImgTitulo").html('<img id="ImgTitulo" src="' + 'http://rian.inta.gob.ar/SituacionAgropecuaria/GenerarTitulo.aspx?rnd=' + ahora + '&consulta=' + TextoVariableSeleccionada + '&fecha=Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '" />') 
+		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
+		//divTituloMapa
 	}
+}
+
+function SumarFecha(pFecha, diasSumo){
+	/*alert(pFecha)
+	alert(diasSumo)*/
+
+	return "17/06/1983"
 }
 
 function LimpiarMapa() {

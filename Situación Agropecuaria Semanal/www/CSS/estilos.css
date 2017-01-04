@@ -112,9 +112,41 @@ header{
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* MAPA */
 
+#divTituloMapa{
+	position: absolute;
+	top: 104px;
+	width: 100%;
+	background: rgba(83,83,83,0.5);
+	color: white;
+    z-index: 77106;
+    text-align: center;
+}
+
+#divTituloMapa p{
+	margin: 2px;
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+}
+
+#divTituloMapa p:nth-child(1){
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#divTituloMapa p:nth-child(2){
+	font-size: 12px;
+	font-weight: normal;
+}
+
+/*#divImgTitulo img{
+	display: block;
+	margin: 0 auto;
+}*/
+
 #map{
     height: calc(100% - 104px);
     width: 100%;
+    overflow:hidden; 
+    z-index:1;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -153,13 +185,7 @@ header{
 	margin: 0px 0px 5px 0px;
 }
 
-/*#pbxSeleccionAño .close-portBox{
-	top: 3px !important;
-	right: 3px !important;
-}*/
-
 #divPbxSeleccionConsulta .cboApp{
-	/*width: auto;*/
 	display: block;
 }
 
@@ -199,6 +225,10 @@ header{
 	    height: calc(100% - 126px);
 	    width: 100%;
 	}
+
+	#divTituloMapa{
+		top: 126px;
+	}
 }
 
 @media (max-width: 350px) {
@@ -208,5 +238,9 @@ header{
 
 	header{
 		height: 116px;
-	}	
+	}
+
+	#divTituloMapa{
+		top: 120px;
+	}
 }
