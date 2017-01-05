@@ -135,12 +135,8 @@ header{
 #divTituloMapa p:nth-child(2){
 	font-size: 12px;
 	font-weight: normal;
+	margin-bottom: 5px;
 }
-
-/*#divImgTitulo img{
-	display: block;
-	margin: 0 auto;
-}*/
 
 #map{
     height: calc(100% - 104px);
@@ -166,7 +162,6 @@ header{
 	font-weight: lighter;
 	margin: 0px 0px 20px 0px;
 }
-
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* Portboxes */
@@ -198,10 +193,6 @@ header{
 }
 
 /* ------- PortBox Salir ------- */
-
-#pbxSalirApp .lnkVolverSeleccion{
-	display: none;
-}
 
 #pbxSalirApp .cmdVerde{
 	width: 40%;

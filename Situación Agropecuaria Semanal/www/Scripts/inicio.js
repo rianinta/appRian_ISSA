@@ -21,24 +21,19 @@ $(function(){
 	$("#splashScreen").hide()
 	/////////////////////////////////////////////
 
+	/////////////////////////////////////////////
+	//Inicializar
 	InicializarMapa()
 	InicializarMenu()
 
+	/////////////////////////////////////////////
+	//Eventos 
 	$("#cmdNuevaConsulta").click(function(){
 		cmdNuevaConsulta_click()
 	});
 
 	$("#cboVariable").change(function(){
 		cboVariable_change($(this).val())
-		/*if($(this).val() == 0){
-			alert("Cero")
-			$('#lnkContinuarSeleccionVariable').bind('click', false);
-			$('#lnkContinuarSeleccionVariable').css("opacity","0.3")
-		}else{
-			alert("Uno")
-			$('#lnkContinuarSeleccionVariable').unbind('click', false);
-			$('#lnkContinuarSeleccionVariable').css("opacity","1")
-		}*/
 	});
 
 	$("#cboAño").change(function(){
@@ -56,32 +51,6 @@ $(function(){
 	$("#lnkConsultar").click(function(){
 		lnkConsultar_click()
 	});
-
-
-	/*$('body').on('click', '#lnkConsultar', function() {
-	    //lnkContinuarSeleccionVariable_click($("#cboVariable").val())
-	    alert("Consulto")
-	});*/
-
-	/*$('body').on('click', '#pbxSeleccionVariable #lnkContinuarSeleccionAño', function() {
-	    lnkContinuarSeleccionAño_click($("#cboVariable").val())
-	});
-
-	$('body').on('click', '#pbxSeleccionVariable .cmdVerde', function() {
-	    cmdVariable_click($(this).data("idvar"))
-	});
-
-	$('body').on('click', '#divPbxSeleccionAño .cmdVerde', function() {
-	    cmdSeleccionAño_click($(this).data("anio"))
-	});
-
-	$('body').on('click', '#divPbxSeleccionAño .lnkVolverSeleccion', function() {
-	    cmdSeleccionAño_volver_click()
-	});*/
-
-	
-
-
 
 	$("#cmdSalir").click(function(){
 		cmdSalir_click()
@@ -191,6 +160,8 @@ function InicializarMenu(){
     $('#CerrarMenu').on('click', function (event) {
         controller.close();
     });
+
+    $("#cmdGuardarMapa").hide()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -436,7 +407,8 @@ function lnkConsultar_click(){
 		LimpiarMapa()
 
 		var ahora = new Date();
-		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+		//geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+		geoXml.parse("http://riancarga.inta.gob.ar/WsEAR/ArmarKML.aspx?rnd=" + ahora.getTime() + "&IdProvincia=22&IdCampania=6&IdCultivo=6")
 
 		//$("#divImgTitulo").html('<img id="ImgTitulo" src="' + 'http://rian.inta.gob.ar/SituacionAgropecuaria/GenerarTitulo.aspx?rnd=' + ahora + '&consulta=' + TextoVariableSeleccionada + '&fecha=Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '" />') 
 		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
@@ -445,10 +417,23 @@ function lnkConsultar_click(){
 }
 
 function SumarFecha(pFecha, diasSumo){
-	/*alert(pFecha)
-	alert(diasSumo)*/
+	var returnDate = new Date(
+		parseInt(pFecha.substr(6,4)),
+		parseInt(pFecha.substr(3,2)) - 1,
+		parseInt(pFecha.substr(0,2)) + diasSumo
+		);
 
-	return "17/06/1983"
+	return AgregoCerosFecha(returnDate.getDate()) + "/" + AgregoCerosFecha(returnDate.getMonth() + 1) + "/" + returnDate.getFullYear()
+}
+
+function AgregoCerosFecha(pNumero){
+	var strNum = String(pNumero)
+
+	if(strNum.length == 1){
+		strNum = "0" + strNum
+	}
+
+	return strNum
 }
 
 function LimpiarMapa() {
