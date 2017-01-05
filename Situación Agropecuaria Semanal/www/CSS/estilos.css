@@ -128,12 +128,12 @@ header{
 }
 
 #divTituloMapa p:nth-child(1){
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: bold;
 }
 
 #divTituloMapa p:nth-child(2){
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 	margin-bottom: 5px;
 }

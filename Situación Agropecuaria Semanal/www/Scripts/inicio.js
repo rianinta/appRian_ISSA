@@ -52,6 +52,10 @@ $(function(){
 		lnkConsultar_click()
 	});
 
+	$("#cmdGuardarMapa").click(function(){
+		cmdGuardarMapa_click()
+	});
+
 	$("#cmdSalir").click(function(){
 		cmdSalir_click()
 	})
@@ -126,8 +130,8 @@ function InicializarMapa(){
 }
 
 function useTheData(doc) {
-    console.log("Hola mapa!")
     $("#pbxCargandoMapa .close-portBox").click();
+    $("#cmdGuardarMapa").show()
 }
 
 function errorParser() {
@@ -407,8 +411,7 @@ function lnkConsultar_click(){
 		LimpiarMapa()
 
 		var ahora = new Date();
-		//geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
-		geoXml.parse("http://riancarga.inta.gob.ar/WsEAR/ArmarKML.aspx?rnd=" + ahora.getTime() + "&IdProvincia=22&IdCampania=6&IdCultivo=6")
+		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
 
 		//$("#divImgTitulo").html('<img id="ImgTitulo" src="' + 'http://rian.inta.gob.ar/SituacionAgropecuaria/GenerarTitulo.aspx?rnd=' + ahora + '&consulta=' + TextoVariableSeleccionada + '&fecha=Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '" />') 
 		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
@@ -455,6 +458,13 @@ function LimpiarMapa() {
 	        geoXml.docs[0].gpolylines.pop();
 	    }
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Guardar y cargar mapas
+
+function cmdGuardarMapa_click(){
+	//Veremos...
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
