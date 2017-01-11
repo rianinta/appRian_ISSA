@@ -26,6 +26,9 @@ $(function(){
 	InicializarMapa()
 	InicializarMenu()
 
+	//Fastclick
+	FastClick.attach(document.body);
+
 	/////////////////////////////////////////////
 	//Eventos 
 	$("#cmdNuevaConsulta").click(function(){
@@ -51,6 +54,12 @@ $(function(){
 	$("#lnkConsultar").click(function(){
 		lnkConsultar_click()
 	});
+
+	$('body').on('click','.lnkMasInfo', function (event) {
+		alert("Lalalala 123")
+        event.preventDefault();
+        lnkMasInfoDepto_click($(this).data('iddepto'))
+    });
 
 	$("#cmdGuardarMapa").click(function(){
 		cmdGuardarMapa_click()
@@ -458,6 +467,10 @@ function LimpiarMapa() {
 	        geoXml.docs[0].gpolylines.pop();
 	    }
     }
+}
+
+function lnkMasInfoDepto_click(pIdDepto){
+	alert(pIdDepto)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

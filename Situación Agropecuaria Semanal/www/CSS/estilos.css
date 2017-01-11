@@ -148,6 +148,11 @@ header{
     width: 500px*/
 }
 
+#map a:link{ color: #1978B0; text-decoration: none;}
+#map a:active{ color: #1978B0; text-decoration: none;}
+#map a:visited{ color: #1978B0; text-decoration: none;}
+#map a:hover{ color: #1558FF; text-decoration: underline;}
+
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* MENU LATERAL */
 
