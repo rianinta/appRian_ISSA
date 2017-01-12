@@ -77,11 +77,8 @@
         <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- PORTBOXES -->
 
-        <div id="pbxCargando" class="portBox">
-            <img src="Imagenes/loading.svg" alt="" align="absmiddle">&nbsp;<span>Cargando...</span>
-        </div>
-        <a href="#" id="lnkPbxCargando" data-display="pbxCargando" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando</a>
-        
+
+        <!-- Selección consulta -->
         <div id="divPbxSeleccionConsulta" class="portBox">
             <p class="H1_pb" id="TituloSeleccionVariable">Nuevo mapa</p>
             <div id="ControlesSeleccion">
@@ -130,17 +127,45 @@
             <a href="#" id="lnkConsultar">Consultar<img class="imgIconos" src="Imagenes/iconoContinuarMenu.png" align="absmiddle" /></a>
         </div>
         <a href="#" id="lnkPbSeleccionConsulta" data-display="divPbxSeleccionConsulta" data-closeBGclick="false" class="button" style="display: none;">Selección consulta</a>
-        
-        <div id="pbxCargandoMapa" class="portBox">
-            <div id="txtCargandoMapa" style="text-align:center;">
-                Cargando mapa...
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <!-- Selección consulta -->
+        <div id="pbxCargando" class="portBox">
+            <div id="txtCargando" style="text-align:center;">
+                Cargando
             </div>
             <div style="text-align:center; padding: 10px;">
                 <img src="Imagenes/loading.gif" style="width: 50px; height: 50px;" alt="" align="absmiddle">
             </div>
         </div>
-        <a href="#" id="lnkPbCargandoMapa" data-display="pbxCargandoMapa" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando Mapa</a>
+        <a href="#" id="lnkPbCargando" data-display="pbxCargando" data-closeBGclick="false" class="button" style="display: none;">Abrir Cargando Mapa</a>
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
+        <!-- Menu Mas datos depto -->
+        <div id="pbxMenuMasDatosDepto" class="portBox">
+            <div id="txtNombreDeptoMasDatos" class="H1_pb">
+                Atreucó
+            </div>
+            <div id="txtFechaMasDatos" class="H3_pb">
+                Semana del 11/12/2012 al 14/11/2012
+            </div>
+            <button id="VerComentarioGeneral" class="botonMasDatosDepto">
+                Ver comentario general
+            </button>
+            <button id="VerComentarioEspecifico" class="botonMasDatosDepto">
+                Ver comentario específico
+            </button>
+            <button id="VerPrecipitaciones" class="botonMasDatosDepto">
+                Ver precipitaciones
+            </button>
+            <button id="VerInforme" class="botonMasDatosDepto">
+                Ver informe
+            </button>
+        </div>
+        <a href="#" id="lnkPbMenuMasDatosDepto" data-display="pbxMenuMasDatosDepto" data-closeBGclick="false" class="button" style="display: none;">Abrir Mas Datos depto</a>
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <!-- Salir app -->
         <div id="pbxSalirApp" class="portBox">
             <p>¿Desea salir de la aplicación?</p>
 

@@ -56,7 +56,6 @@ $(function(){
 	});
 
 	$('body').on('click','.lnkMasInfo', function (event) {
-		alert("Lalalala 123")
         event.preventDefault();
         lnkMasInfoDepto_click($(this).data('iddepto'))
     });
@@ -139,7 +138,7 @@ function InicializarMapa(){
 }
 
 function useTheData(doc) {
-    $("#pbxCargandoMapa .close-portBox").click();
+    $("#pbxCargando .close-portBox").click();
     $("#cmdGuardarMapa").show()
 }
 
@@ -174,7 +173,7 @@ function InicializarMenu(){
         controller.close();
     });
 
-    $("#cmdGuardarMapa").hide()
+    //$("#cmdGuardarMapa").hide()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,18 +412,19 @@ function cboSemana_change(pSemana){
 function lnkConsultar_click(){
 	if(VariableSeleccionada != undefined && AñoSeleccionado != undefined && MesSeleccionado != undefined && SemanaConsultada != undefined){
 		$("#divPbxSeleccionConsulta .close-portBox").click();
-		$("#lnkPbCargandoMapa").click();
 
-		$("#pbxCargandoMapa .close-portBox").hide();
+		//Cambio el texto
+		$("#txtCargando").text("Cargando mapa...")
+		$("#lnkPbCargando").click();
+
+		$("#pbxCargando .close-portBox").hide();
 
 		LimpiarMapa()
 
 		var ahora = new Date();
 		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
 
-		//$("#divImgTitulo").html('<img id="ImgTitulo" src="' + 'http://rian.inta.gob.ar/SituacionAgropecuaria/GenerarTitulo.aspx?rnd=' + ahora + '&consulta=' + TextoVariableSeleccionada + '&fecha=Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '" />') 
 		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
-		//divTituloMapa
 	}
 }
 
@@ -470,7 +470,11 @@ function LimpiarMapa() {
 }
 
 function lnkMasInfoDepto_click(pIdDepto){
-	alert(pIdDepto)
+	//alert(pIdDepto)
+
+	//Cambio el texto
+	$("#txtCargando").text("Buscando datos....")
+	$("#lnkPbCargando").click();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -478,6 +482,8 @@ function lnkMasInfoDepto_click(pIdDepto){
 
 function cmdGuardarMapa_click(){
 	//Veremos...
+
+	$("#lnkPbMenuMasDatosDepto").click();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

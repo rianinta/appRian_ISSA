@@ -188,6 +188,12 @@ header{
 	margin: 0px 0px 5px 0px;
 }
 
+.H3_pb{
+	font-size: 17px;
+	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+}
+
 #divPbxSeleccionConsulta .cboApp{
 	display: block;
 }
@@ -195,6 +201,24 @@ header{
 .imgIconos{
 	width: 25px;
 	margin-left: 5px;
+}
+
+/* ------ Portbox Menú Más datos ------- */
+
+.botonMasDatosDepto{
+	background-color: #217CA7;
+	padding: 10px;
+	margin: 8px 0px 8px 0px;
+	color: white;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+	border: 0;
+	width: 100%;
+	text-align: left;
+	display: block;
+}
+
+.botonMasDatosDepto:active{
+	background-color: #90D3F4;
 }
 
 /* ------- PortBox Salir ------- */
