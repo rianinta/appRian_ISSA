@@ -12,6 +12,8 @@ var AñoSeleccionado
 var MesSeleccionado
 var SemanaConsultada
 var htmlListadoAños = ""
+var CantMasDatos = 0
+var DepartamentoClickeado
 
 $(function(){
 	/////////////////////////////////////////////
@@ -59,6 +61,15 @@ $(function(){
         event.preventDefault();
         lnkMasInfoDepto_click($(this).data('iddepto'))
     });
+
+	$("#VerComentarioGeneral").click(function(){
+		VerComentarioGeneral_click()
+	});
+
+	$('body').on('click','.close-portBox', function (event) {
+        event.preventDefault();
+        CierraPortbox($(this).parent().attr('id'))
+    });    
 
 	$("#cmdGuardarMapa").click(function(){
 		cmdGuardarMapa_click()
@@ -173,7 +184,7 @@ function InicializarMenu(){
         controller.close();
     });
 
-    //$("#cmdGuardarMapa").hide()
+    $("#cmdGuardarMapa").hide()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -470,11 +481,137 @@ function LimpiarMapa() {
 }
 
 function lnkMasInfoDepto_click(pIdDepto){
-	//alert(pIdDepto)
-
 	//Cambio el texto
 	$("#txtCargando").text("Buscando datos....")
 	$("#lnkPbCargando").click();
+
+	DepartamentoClickeado = pIdDepto
+
+	//Busco las semanas
+	$.ajax({
+	    type: "POST",
+	    url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeTiposMasDatosPorDepto",
+	    data: '{pIdDepto: "' + pIdDepto + '", pFecha: "' + SemanaConsultada + '"}',
+	    cache: false,
+	    contentType: "application/json; charset=utf-8",
+	    dataType: "json",
+	    success: MuestroMenuMasDatosInfo,
+	    error: function (XMLHttpRequest, textStatus, errorThrown) {
+	     	alert("Error en la llamada")
+	    }
+	});
+}
+
+function MuestroMenuMasDatosInfo(response){
+	var datos = jQuery.parseJSON(response.d);
+
+	var vTieneComentario = 0
+	var vTieneAdversidad = 0
+	var vTienePrecipitaciones = 0
+	var vTieneInforme = 0
+
+	CantMasDatos = 0
+
+	$.each(datos, function(index, Valores) {
+        if(Valores.TieneComentario == "1"){
+        	$("#VerComentarioGeneral").show()
+        	CantMasDatos = CantMasDatos + 1
+        	vTieneComentario = 1
+        }else{
+        	$("#VerComentarioGeneral").hide()
+        }
+
+        if(Valores.TieneAdversidad == "1"){
+        	$("#VerComentarioEspecifico").show()
+        	CantMasDatos = CantMasDatos + 1
+        	vTieneAdversidad = 1
+        }else{
+        	$("#VerComentarioEspecifico").hide()
+        }
+
+        if(Valores.TieneLluvias == "1"){
+        	$("#VerPrecipitaciones").show()
+        	CantMasDatos = CantMasDatos + 1
+        	vTienePrecipitaciones = 1
+        }else{
+        	$("#VerPrecipitaciones").hide()
+        }
+
+        if(Valores.TieneInforme == "1"){
+        	$("#VerInforme").show()
+        	CantMasDatos = CantMasDatos + 1
+        	vTieneInforme = 1
+        }else{
+        	$("#VerInforme").hide()
+        }
+    });
+
+	if(CantMasDatos > 1){
+		//Tiene más de un dato para mostrar, le abro el menú
+		$("#pbxCargando .close-portBox").click();
+    	$("#lnkPbMenuMasDatosDepto").click();	
+	} else {
+		//Solo tiene un dato para mostrar, se lo presento directamente
+		if(vTieneComentario == 1){
+			BuscoComentarioDepto()
+		}else{
+			if(vTieneAdversidad == 1){
+				BuscoAdversidadDepto()
+			}else{
+				if(vTienePrecipitaciones == 1){
+					BuscoPrecipitacionesDepto()
+				}else{
+					BuscoInformeDepto()
+				}
+			}
+		}
+	}
+}
+
+function BuscoComentarioDepto(){
+	$("#txtCargando").text("Buscando comentario...")
+
+	console.log(DepartamentoClickeado)
+	console.log(SemanaConsultada)
+	console.log("-------------------------------------------")
+
+
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeComentarioDepartamento",
+        data: '{pIdDepto: "' + DepartamentoClickeado + '", pFecha: "' + SemanaConsultada + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: MuestroComentario,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	     	alert("Error en la llamada")
+	    }
+    });
+}
+
+function VerComentarioGeneral_click(){
+	$("#pbxMenuMasDatosDepto .close-portBox").click();
+	$("#txtCargando").text("Buscando comentario...")
+	$("#lnkPbCargando").click()
+
+	BuscoComentarioDepto()
+}
+
+function MuestroComentario(response){
+	var strHtml = '<div id="" class="H1_pb">Comentario general</div>'
+	strHtml = strHtml + '<p>' + response.d + '</p>'
+
+	$("#pbxCargando .close-portBox").click();
+	$("#pbxUnMasDatos").html(strHtml)
+	$("#lnkPbUnMasDatos").click();
+}
+
+function CierraPortbox(pNombrePortbox){
+	if(pNombrePortbox == "pbxUnMasDatos" && CantMasDatos > 1){
+		//Si tiene más de un dato abro el menú de mas datos
+		$("#lnkPbMenuMasDatosDepto").click()
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -482,8 +619,6 @@ function lnkMasInfoDepto_click(pIdDepto){
 
 function cmdGuardarMapa_click(){
 	//Veremos...
-
-	$("#lnkPbMenuMasDatosDepto").click();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
