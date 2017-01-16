@@ -602,6 +602,8 @@ function VerComentarioGeneral_click(){
 }
 
 function MuestroComentario(response){
+	ArmoDivPbMasDatos()
+
 	var strHtml = '<div id="" class="H1_pb">Comentario general</div>'
 	strHtml = strHtml + '<p>' + response.d + '</p>'
 
@@ -636,6 +638,8 @@ function VerAdversidadGeneral_click(){
 }
 
 function MuestroAdversidad(response){
+	ArmoDivPbMasDatos()
+
 	var strHtml = '<div id="" class="H1_pb">Comentario específico</div>'
 	strHtml = strHtml + '<p>' + response.d + '</p>'
 
@@ -670,11 +674,9 @@ function BuscoPrecipitacionesDepto(){
 }
 
 function MuestroPrecipitaciones(response){
+	ArmoDivPbMasDatos()
+	
 	var datos = jQuery.parseJSON(response.d);
-
-	//alert(datos.Registros[0].Medidor)
-	//alert(datos.Registros[0].Anual)
-	//alert("Largo: " + datos.Registros.length)
 
 	var strHtml = '<div id="" class="H1_pb">Precipitaciones</div>'
 	strHtml = strHtml + '<table id="tblPrecipitacionesMasInfo"><tr><td style="border-left: 1px solid #085980; border-top: 1px solid #085980; border-bottom: 1px solid #085980;">&nbsp;</td><td colspan="3" class="textoCentrado">Acumulados</td></tr>'
@@ -687,6 +689,12 @@ function MuestroPrecipitaciones(response){
     $("#pbxCargando .close-portBox").click();
 	$("#pbxUnMasDatos").html(strHtml)
 	$("#lnkPbUnMasDatos").click();
+}
+
+function ArmoDivPbMasDatos(){
+	var strHtmlDiv = '<div id="pbxUnMasDatos" class="portBox"></div><a href="#" id="lnkPbUnMasDatos" data-display="pbxUnMasDatos" data-closeBGclick="false" class="button" style="display: none;">Un Mas Datos</a>'
+
+	$("#divUnMasDatosDepto").html(strHtmlDiv)
 }
 
 function CierraPortbox(pNombrePortbox){

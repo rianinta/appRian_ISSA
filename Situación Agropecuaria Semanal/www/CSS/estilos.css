@@ -227,6 +227,7 @@ header{
 
 #tblPrecipitacionesMasInfo{
 	border-collapse: collapse;
+	table-layout:fixed;
 }
 
 #tblPrecipitacionesMasInfo tr td{
