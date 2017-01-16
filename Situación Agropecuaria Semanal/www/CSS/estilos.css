@@ -13,6 +13,10 @@ img {
     height: auto;
 }
 
+.textoCentrado{
+	text-align: center;
+}
+
 .cmdVerde
 {
     position: relative;
@@ -219,6 +223,21 @@ header{
 
 .botonMasDatosDepto:active{
 	background-color: #90D3F4;
+}
+
+#tblPrecipitacionesMasInfo{
+	border-collapse: collapse;
+}
+
+#tblPrecipitacionesMasInfo tr td{
+	border: 1px solid white;
+	color: white;
+	padding: 4px;
+}
+
+.sinBorde{
+	border-top: none;
+	border-left: none;
 }
 
 /* ------- PortBox Salir ------- */

@@ -66,6 +66,14 @@ $(function(){
 		VerComentarioGeneral_click()
 	});
 
+	$("#VerComentarioEspecifico").click(function(){
+		VerAdversidadGeneral_click()	
+	});
+
+	$("#VerPrecipitaciones").click(function(){
+		VerPrecipitaciones_click()	
+	});
+
 	$('body').on('click','.close-portBox', function (event) {
         event.preventDefault();
         CierraPortbox($(this).parent().attr('id'))
@@ -571,11 +579,6 @@ function MuestroMenuMasDatosInfo(response){
 function BuscoComentarioDepto(){
 	$("#txtCargando").text("Buscando comentario...")
 
-	console.log(DepartamentoClickeado)
-	console.log(SemanaConsultada)
-	console.log("-------------------------------------------")
-
-
 	$.ajax({
         type: "POST",
         url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeComentarioDepartamento",
@@ -603,6 +606,85 @@ function MuestroComentario(response){
 	strHtml = strHtml + '<p>' + response.d + '</p>'
 
 	$("#pbxCargando .close-portBox").click();
+	$("#pbxUnMasDatos").html(strHtml)
+	$("#lnkPbUnMasDatos").click();
+}
+
+function BuscoAdversidadDepto(){
+	$("#txtCargando").text("Buscando comentario...")
+
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeAdversidadDepartamento",
+        data: '{pIdDepto: "' + DepartamentoClickeado + '", pFecha: "' + SemanaConsultada + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: MuestroAdversidad,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	     	alert("Error en la llamada")
+	    }
+    });
+}
+
+function VerAdversidadGeneral_click(){
+	$("#pbxMenuMasDatosDepto .close-portBox").click();
+	$("#txtCargando").text("Buscando comentario...")
+	$("#lnkPbCargando").click()
+
+	BuscoAdversidadDepto()
+}
+
+function MuestroAdversidad(response){
+	var strHtml = '<div id="" class="H1_pb">Comentario específico</div>'
+	strHtml = strHtml + '<p>' + response.d + '</p>'
+
+	$("#pbxCargando .close-portBox").click();
+	$("#pbxUnMasDatos").html(strHtml)
+	$("#lnkPbUnMasDatos").click();
+}
+
+function VerPrecipitaciones_click(){
+	$("#pbxMenuMasDatosDepto .close-portBox").click();
+	$("#txtCargando").text("Buscando precipitaciones...")
+	$("#lnkPbCargando").click()
+
+	BuscoPrecipitacionesDepto()
+}
+
+function BuscoPrecipitacionesDepto(){
+	$("#txtCargando").text("Buscando precipitaciones...")
+
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraePrecipitacionesDepartamento",
+        data: '{pIdDepto: "' + DepartamentoClickeado + '", pFecha: "' + SemanaConsultada + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: MuestroPrecipitaciones,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	     	alert("Error en la llamada")
+	    }
+    });
+}
+
+function MuestroPrecipitaciones(response){
+	var datos = jQuery.parseJSON(response.d);
+
+	//alert(datos.Registros[0].Medidor)
+	//alert(datos.Registros[0].Anual)
+	//alert("Largo: " + datos.Registros.length)
+
+	var strHtml = '<div id="" class="H1_pb">Precipitaciones</div>'
+	strHtml = strHtml + '<table id="tblPrecipitacionesMasInfo"><tr><td style="border-left: 1px solid #085980; border-top: 1px solid #085980; border-bottom: 1px solid #085980;">&nbsp;</td><td colspan="3" class="textoCentrado">Acumulados</td></tr>'
+	strHtml = strHtml + '<tr><td style="border-left: 1px solid #085980;">&nbsp;</td><td class="textoCentrado">Semanal</td><td class="textoCentrado">Mensual</td><td class="textoCentrado">Anual</td></tr>'
+
+	for(var x = 0; x < datos.Registros.length; x++) {
+		strHtml = strHtml + '<tr><td>' + datos.Registros[x].Medidor + '</td><td>' + datos.Registros[x].Semanal + ' mm</td><td>' + datos.Registros[x].Mensual + ' mm</td><td>' + datos.Registros[x].Anual + ' mm</td></tr>'
+    }
+
+    $("#pbxCargando .close-portBox").click();
 	$("#pbxUnMasDatos").html(strHtml)
 	$("#lnkPbUnMasDatos").click();
 }
