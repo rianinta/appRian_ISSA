@@ -237,9 +237,19 @@ header{
 	font-size: 0.875em;
 }
 
-.sinBorde{
-	border-top: none;
-	border-left: none;
+/* ------- PortBox Informe ------- */
+#pbxUnMasDatos img.imgInforme{
+	height: 70px;
+	width: 70px;
+}
+
+#pbxUnMasDatos p.NombreArchivoInforme{
+	font-size: 0.875em; 
+	margin: 2px 0px 8px 0px;
+}
+
+#pbxUnMasDatos .lnkDescargarInforme img{
+	width: 25px;
 }
 
 /* ------- PortBox Salir ------- */

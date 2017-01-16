@@ -74,6 +74,10 @@ $(function(){
 		VerPrecipitaciones_click()	
 	});
 
+	$("#VerInforme").click(function(){
+		VerInforme_click()
+	});
+
 	$('body').on('click','.close-portBox', function (event) {
         event.preventDefault();
         CierraPortbox($(this).parent().attr('id'))
@@ -675,7 +679,7 @@ function BuscoPrecipitacionesDepto(){
 
 function MuestroPrecipitaciones(response){
 	ArmoDivPbMasDatos()
-	
+
 	var datos = jQuery.parseJSON(response.d);
 
 	var strHtml = '<div id="" class="H1_pb">Precipitaciones</div>'
@@ -689,6 +693,98 @@ function MuestroPrecipitaciones(response){
     $("#pbxCargando .close-portBox").click();
 	$("#pbxUnMasDatos").html(strHtml)
 	$("#lnkPbUnMasDatos").click();
+}
+
+function VerInforme_click(){
+	$("#pbxMenuMasDatosDepto .close-portBox").click();
+	$("#txtCargando").text("Buscando informe...")
+	$("#lnkPbCargando").click()
+
+	BuscoInformeDepto()
+}
+
+function BuscoInformeDepto(){
+	$("#txtCargando").text("Buscando informe...")
+
+	$.ajax({
+        type: "POST",
+        url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeInformeDepartamento",
+        data: '{pIdDepto: "' + DepartamentoClickeado + '", pFecha: "' + SemanaConsultada + '"}',
+        cache: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: MuestroInforme,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+	     	alert("Error en la llamada")
+	    }
+    });
+}
+
+function MuestroInforme(response){
+	ArmoDivPbMasDatos()
+
+	var strHtml = '<div id="" class="H1_pb">Informe adjunto</div><div style="text-align:center;"><img class="imgInforme" src="'
+
+	var datos = jQuery.parseJSON(response.d);
+
+	//alert(datos.Informe.Nombre)
+	//alert(datos.Informe.Ubicacion)
+
+	var extension = datos.Informe.Ubicacion.substring(datos.Informe.Ubicacion.lastIndexOf("."))
+
+	switch (extension.toLowerCase()) {
+	    case ".jpg":
+	        strHtml = strHtml + 'Imagenes/Archivos/imagen.png" />'
+	        break;
+	    case ".jpeg":
+	        strHtml = strHtml + 'Imagenes/Archivos/imagen.png" />'
+	        break;
+	    case ".gif":
+	        strHtml = strHtml + 'Imagenes/Archivos/imagen.png" />'
+	        break;
+	    case ".png":
+	        strHtml = strHtml + 'Imagenes/Archivos/imagen.png" />'
+	        break;
+	    case ".doc":
+	        strHtml = strHtml + 'Imagenes/Archivos/word.png" />'
+	        break;
+	    case ".docx":
+	        strHtml = strHtml + 'Imagenes/Archivos/word.png" />'
+	        break;
+	    case  ".pdf":
+	        strHtml = strHtml + 'Imagenes/Archivos/pdf.png" />'
+	        break;
+	    case  ".txt":
+	        strHtml = strHtml + 'Imagenes/Archivos/texto.png" />'
+	        break;
+	    case  ".xls":
+	        strHtml = strHtml + 'Imagenes/Archivos/excel.png" />'
+	        break;
+	    case  ".xlsx":
+	        strHtml = strHtml + 'Imagenes/Archivos/excel.png" />'
+	        break;
+	    case  ".zip":
+	        strHtml = strHtml + 'Imagenes/Archivos/comprimido.png" />'
+	        break;
+	    case  ".rar":
+	        strHtml = strHtml + 'Imagenes/Archivos/comprimido.png" />'
+	        break;
+	    default:
+	    	strHtml = strHtml + 'Imagenes/Archivos/desconocido.png" />'
+	    	break;
+	}
+
+	strHtml = strHtml + "</div><p class='NombreArchivoInforme textoCentrado'>" + datos.Informe.Nombre + "</p>"
+	strHtml = strHtml + "<a class='lnkDescargarInforme textoCentrado' href='http://riancarga.inta.gob.ar/situacionagropecuaria/informes/" + datos.Informe.Ubicacion + "'>Descargar&nbsp;<img align='absmiddle' src='Imagenes/iconoContinuarMenu.png' /></a>"
+
+	$("#pbxCargando .close-portBox").click();
+	$("#pbxUnMasDatos").html(strHtml)
+	$("#lnkPbUnMasDatos").click();
+
+	//str.substring(str.lastIndexOf("."))
+
+
+
 }
 
 function ArmoDivPbMasDatos(){
