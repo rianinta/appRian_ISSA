@@ -24,6 +24,8 @@
 	<plugin name="cordova-plugin-whitelist" version="1"/>
 	<!-- Crossview -->
 	<plugin name="cordova-plugin-crosswalk-webview" source="npm"/>
+	<!-- Descargar archivos -->
+	<plugin name="cordova-plugin-file-transfer" source="npm"/>
 	<!-- Intents -->
 	<allow-intent href="http://*/*"/>
 	<allow-intent href="https://*/*"/>

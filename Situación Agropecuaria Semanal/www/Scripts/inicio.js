@@ -196,7 +196,7 @@ function InicializarMenu(){
         controller.close();
     });
 
-    $("#cmdGuardarMapa").hide()
+    //$("#cmdGuardarMapa").hide()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -780,11 +780,6 @@ function MuestroInforme(response){
 	$("#pbxCargando .close-portBox").click();
 	$("#pbxUnMasDatos").html(strHtml)
 	$("#lnkPbUnMasDatos").click();
-
-	//str.substring(str.lastIndexOf("."))
-
-
-
 }
 
 function ArmoDivPbMasDatos(){
@@ -805,6 +800,29 @@ function CierraPortbox(pNombrePortbox){
 
 function cmdGuardarMapa_click(){
 	//Veremos...
+	var fileTransfer = new FileTransfer();
+	var ahora = new Date();
+
+    var uri = encodeURI("http://rian.inta.gob.ar/Imagenes/LogoRIAN.jpg");
+    var fileURL =  "///storage/emulated/0/Download/LogoRIAN.jpg";
+
+    fileTransfer.download(
+    	uri, fileURL, function(entry) {
+        	alert("Descargó el logo RIAN!: " + entry.toURL());
+        },
+            
+        function(error) {
+        	alert("download error source " + error.source);
+            alert("download error target " + error.target);
+            alert("download error code" + error.code);
+        },
+            
+        false, {
+        	headers: {
+            	"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+            }
+        }
+    );
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
