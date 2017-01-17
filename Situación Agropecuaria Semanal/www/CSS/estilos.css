@@ -219,6 +219,7 @@ header{
 	width: 100%;
 	text-align: left;
 	display: block;
+	padding-left: 10px;
 }
 
 .botonMasDatosDepto:active{

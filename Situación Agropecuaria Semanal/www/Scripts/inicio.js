@@ -83,9 +83,9 @@ $(function(){
         CierraPortbox($(this).parent().attr('id'))
     });    
 
-	$("#cmdGuardarMapa").click(function(){
+	/*$("#cmdGuardarMapa").click(function(){
 		cmdGuardarMapa_click()
-	});
+	});*/
 
 	$("#cmdSalir").click(function(){
 		cmdSalir_click()
@@ -162,7 +162,7 @@ function InicializarMapa(){
 
 function useTheData(doc) {
     $("#pbxCargando .close-portBox").click();
-    $("#cmdGuardarMapa").show()
+    //$("#cmdGuardarMapa").show()
 }
 
 function errorParser() {
@@ -521,10 +521,13 @@ function MuestroMenuMasDatosInfo(response){
 	var vTieneAdversidad = 0
 	var vTienePrecipitaciones = 0
 	var vTieneInforme = 0
+	var vNombreDeptoCliqueado = ""
 
 	CantMasDatos = 0
 
 	$.each(datos, function(index, Valores) {
+		vNombreDeptoCliqueado = Valores.NombreDepto
+
         if(Valores.TieneComentario == "1"){
         	$("#VerComentarioGeneral").show()
         	CantMasDatos = CantMasDatos + 1
@@ -560,6 +563,9 @@ function MuestroMenuMasDatosInfo(response){
 
 	if(CantMasDatos > 1){
 		//Tiene más de un dato para mostrar, le abro el menú
+		$("#txtNombreDeptoMasDatos").text(vNombreDeptoCliqueado)
+		$("#txtFechaMasDatos").text("Semana del " + SemanaConsultada + " al " + SumarFecha(SemanaConsultada, 6))		
+
 		$("#pbxCargando .close-portBox").click();
     	$("#lnkPbMenuMasDatosDepto").click();	
 	} else {
@@ -798,7 +804,7 @@ function CierraPortbox(pNombrePortbox){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Guardar y cargar mapas
 
-function cmdGuardarMapa_click(){
+/*function cmdGuardarMapa_click(){
 	//Veremos...
 	var fileTransfer = new FileTransfer();
 	var ahora = new Date();
@@ -823,7 +829,7 @@ function cmdGuardarMapa_click(){
             }
         }
     );
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funciones varias
