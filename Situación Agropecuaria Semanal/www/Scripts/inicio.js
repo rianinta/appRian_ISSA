@@ -451,19 +451,23 @@ function lnkConsultar_click(){
 		LimpiarMapa()
 
 		var ahora = new Date();
-		//geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
-		$.ajax({
-		    type: "POST",
-		    url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeDatosMapa",
-	        data: '{pAnio: "' + SemanaConsultada.substr(6,4) + '", pMes: "' + SemanaConsultada.substr(3,2) + '", pDia: "' + SemanaConsultada.substr(0,2) + '", pVariable: "' + VariableSeleccionada + '"}',
-		    cache: false,
-		    contentType: "application/json; charset=utf-8",
-		    dataType: "json",
-		    success: PintoUnMapa,
-		    error: function (XMLHttpRequest, textStatus, errorThrown) {
-		    	alert("Error en la llamada")
-		    }
-		});
+
+		if(document.getElementById("chkLeerLocal").checked == true){
+			$.ajax({
+			    type: "POST",
+			    url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeDatosMapa",
+		        data: '{pAnio: "' + SemanaConsultada.substr(6,4) + '", pMes: "' + SemanaConsultada.substr(3,2) + '", pDia: "' + SemanaConsultada.substr(0,2) + '", pVariable: "' + VariableSeleccionada + '"}',
+			    cache: false,
+			    contentType: "application/json; charset=utf-8",
+			    dataType: "json",
+			    success: PintoUnMapa,
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {
+			    	alert("Error en la llamada")
+			    }
+			});
+		}else{
+			geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+		}
 
 		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
 	}
@@ -484,7 +488,6 @@ function PintoUnMapa(response){
         }
 
         geoXml.parseKmlString(new XMLSerializer().serializeToString(data))
-    	map.fitBounds(geoXml.docs[0].bounds)
 	});
 }
 
