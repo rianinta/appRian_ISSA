@@ -158,6 +158,12 @@ function InicializarMapa(){
         afterParse: useTheData,
         failedParse: errorParser
     });
+
+   
+}
+
+function DevuelveColorDeptoSegunDato(unDato){
+	return "#color" + unDato
 }
 
 function useTheData(doc) {
@@ -445,10 +451,41 @@ function lnkConsultar_click(){
 		LimpiarMapa()
 
 		var ahora = new Date();
-		geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+		//geoXml.parse("http://riancarga.inta.gob.ar/WsApps/ISSA/ArmarMapa.aspx?rnd=" + ahora.getTime() + "&Dia=" + SemanaConsultada.substr(0,2)  + "&Mes=" + SemanaConsultada.substr(3,2)  + "&Anio=" + SemanaConsultada.substr(6,4) + "&Variable=" + VariableSeleccionada);
+		$.ajax({
+		    type: "POST",
+		    url: "http://riancarga.inta.gob.ar/WsApps/ISSA/ISSA.aspx/TraeDatosMapa",
+	        data: '{pAnio: "' + SemanaConsultada.substr(6,4) + '", pMes: "' + SemanaConsultada.substr(3,2) + '", pDia: "' + SemanaConsultada.substr(0,2) + '", pVariable: "' + VariableSeleccionada + '"}',
+		    cache: false,
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    success: PintoUnMapa,
+		    error: function (XMLHttpRequest, textStatus, errorThrown) {
+		    	alert("Error en la llamada")
+		    }
+		});
 
 		$("#divTituloMapa").html('<p>' + TextoVariableSeleccionada + '</p><p>Semana del ' + SemanaConsultada + ' al ' + SumarFecha(SemanaConsultada, 6) + '</p>')
 	}
+}
+
+function PintoUnMapa(response){
+	$.get("Archivos/MapaBase.xml", function( data ) {
+    	var datos = jQuery.parseJSON(response.d);
+
+		for (var x = 0; x < datos.Registros.length - 1; x++) {
+			var xmlIndiceDepto = data.evaluate('count(kml/Document/Folder[2]/Placemark[@id="' + datos.Registros[x].IdDepto + '"]/preceding-sibling::*)', data, null, XPathResult.STRING_TYPE, null);
+	        var numIndiceDepto = Number(xmlIndiceDepto.stringValue)
+
+	        numIndiceDepto = numIndiceDepto * 2 + 1
+
+	        xmlUnEstilo = data.firstChild.childNodes[1].childNodes[23].childNodes[numIndiceDepto].childNodes[3]
+	        xmlUnEstilo.innerHTML = DevuelveColorDeptoSegunDato(datos.Registros[x].Dato)
+        }
+
+        geoXml.parseKmlString(new XMLSerializer().serializeToString(data))
+    	map.fitBounds(geoXml.docs[0].bounds)
+	});
 }
 
 function SumarFecha(pFecha, diasSumo){
